@@ -9,6 +9,6 @@ package baseDatos;
  *
  * @author alumnogreibd
  */
-public class Pasd {
+public class NewClass {
     
 }
