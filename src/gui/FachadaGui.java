@@ -38,8 +38,8 @@ public class FachadaGui {
         //vp.setVisible(true);
         va.setVisible(true);
         //vu.setVisible(false);
-        vadmin.setVisible(true);
-        vrest.setVisible(false);
+        //vadmin.setVisible(true);
+        //vrest.setVisible(false);
         //vcomprar.setVisible(false);
     }
     
@@ -68,6 +68,13 @@ public class FachadaGui {
     
     public void verUsuarios(){
         vu.setVisible(true);
+    }
+    public String esRestaurador(String idRestaurador){
+        return idRestaurador;
+    }
+
+    public void setVrest(VRestaurador vrest) {
+        this.vrest = vrest;
     }
    
 }

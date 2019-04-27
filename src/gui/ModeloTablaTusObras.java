@@ -4,6 +4,8 @@
  */
 
 package gui;
+import aplicacion.Antiguidade;
+import aplicacion.AntiguidadeSimplif;
 import aplicacion.Obra;
 import javax.swing.table.*;
 /**
@@ -11,14 +13,14 @@ import javax.swing.table.*;
  * @author basesdatos
  */
 public class ModeloTablaTusObras extends AbstractTableModel{
-    private java.util.List<Obra> obras;
+    private java.util.List<AntiguidadeSimplif> obras;
 
     public ModeloTablaTusObras(){
-        this.obras=new java.util.ArrayList<Obra>();
+        this.obras=new java.util.ArrayList<>();
     }
 
     public int getColumnCount (){
-        return 4;
+        return 5;
     }
 
     public int getRowCount(){
@@ -34,6 +36,8 @@ public class ModeloTablaTusObras extends AbstractTableModel{
             case 1: nombre= "Estado"; break;
             case 2: nombre= "Fecha Inicio"; break;
             case 3: nombre= "Fecha Fin"; break;
+            case 4: nombre= "Código"; break;
+                
         }
         return nombre;
     }
@@ -47,6 +51,7 @@ public class ModeloTablaTusObras extends AbstractTableModel{
             case 1: clase= java.lang.String.class; break;
             case 2: clase= java.lang.String.class; break;
             case 3: clase= java.lang.String.class; break;
+            case 4: clase= java.lang.Integer.class; break;
         }
         return clase;
     }
@@ -60,20 +65,21 @@ public class ModeloTablaTusObras extends AbstractTableModel{
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= obras.get(row).getTitulo(); break;
-            //case 1: resultado= obras.get(row).getNombre(); break;//estado
-            //case 2: resultado=obras.get(row).getEmail();break;//fecha inicio
-            //case 3: resultado=obras.get(row).getTipoUsuario(); break;//fecha fin
+            case 0: resultado= obras.get(row).getNombre(); break;//titulo
+            case 1: resultado= obras.get(row).getEstado(); break;//estado
+            case 2: resultado=obras.get(row).getF_ini();break;//fecha inicio
+            case 3: resultado=obras.get(row).getF_fin(); break;//fecha fin
+            case 4: resultado=obras.get(row).getCodigo();break;//codigo
         }
         return resultado;
     }
 
-    public void setFilas(java.util.List<Obra> obras){
+    public void setFilas(java.util.List<AntiguidadeSimplif> obras){
         this.obras=obras;
         fireTableDataChanged();
     }
 
-    public Obra obtenerUsuario(int i){
+    public AntiguidadeSimplif obtenerUsuario(int i){
         return this.obras.get(i);
     }
 

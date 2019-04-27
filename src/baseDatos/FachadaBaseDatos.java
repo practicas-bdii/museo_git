@@ -5,7 +5,10 @@
 
 package baseDatos;
 
+import aplicacion.Antiguidade;
+import aplicacion.AntiguidadeSimplif;
 import aplicacion.Autor;
+import aplicacion.Obra;
 import aplicacion.Usuario;
 import aplicacion.TipoUsuario;
 import aplicacion.Suministrador;
@@ -26,6 +29,7 @@ public class FachadaBaseDatos {
     private DAOUsuarios daoUsuarios;
     private DAOSuministradores daoSuministradores;
     private DAOAutores daoAutores;
+    private DAORestauracion daorestauracion;
     
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
         
@@ -52,8 +56,10 @@ public class FachadaBaseDatos {
                     usuario);
 
             daoUsuarios = new DAOUsuarios(conexion, fa);
-          
-
+            daorestauracion = new DAORestauracion(conexion, fa);
+            daoAutores = new DAOAutores(conexion, fa);
+            daoSuministradores = new DAOSuministradores(conexion, fa);
+            
 
         } catch (FileNotFoundException f){
             System.out.println(f.getMessage());
@@ -130,5 +136,24 @@ public class FachadaBaseDatos {
     public java.util.List<Autor> consultarAutores(){
         return daoAutores.consultarAutores();
     } 
+    //Gestion de Restauracion
+   public java.util.List<AntiguidadeSimplif> obtenerObras(String Restaurador) {
+       System.out.println("fbd");
+             return daorestauracion.obtenerObras(Restaurador);
+    }
+   public java.util.List<AntiguidadeSimplif> obtenerDemasObras(String titulo) {
+       //System.out.println("fbd");
+        return daorestauracion.obtenerDemasObras(titulo);
+    }
+   public void insertaRestauracion(Integer CodObra, String Restaurador){
+       if(daorestauracion.existeRestauracion(CodObra)==false)
+        daorestauracion.realizarRestauracion(CodObra, Restaurador);
+    }
+   public java.util.List<AntiguidadeSimplif> obtenerTodasObras() {
+         return daorestauracion.obtenerTodasObras();
+    }
+   public void finalizaRestauracion(Integer CodObra, String Restaurador){
+        daorestauracion.finalizaRestauracion(CodObra, Restaurador);
+    }
    
 }

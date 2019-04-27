@@ -6,8 +6,8 @@ package aplicacion;
  */
 
 public enum TipoEstado {
-    Bo,
-    Mal,
-    Restaurándose
+    bo,
+    mal,
+    restaurandose
 
 }
