@@ -23,6 +23,7 @@ public class FachadaAplicacion {
         cu = new GestionUsuarios(fgui, fbd);
         cs = new GestionSuministradores(fgui,fbd);
         ca = new GestionAutores(fgui,fbd);
+        gr = new GestionRestauraciones(fgui, fbd);
     }
 
     public static void main(String args[]) {
@@ -63,12 +64,7 @@ public int comprobarAutentificacion(String idUsuario, String clave) {
     public void borrarUsuario(String idUsuario) {
         cu.borrarUsuario(idUsuario);
     }
-//public Usuario damePrimero(String idUsuario, String nombre){
-//   Usuario u;
-//    u=cu.damePrimero(idUsuario, nombre);
-//    return u;
-//}
-//administracion de categorias
+
 
     public void adminCategorias() {
         //aqui debería abrir a ventana de administración de usuarios
@@ -105,8 +101,22 @@ public int comprobarAutentificacion(String idUsuario, String clave) {
     public java.util.List<Autor> obtenerAutores(){
         return ca.obtenerAutores();
     }
-     public java.util.List<Obra> obtenerObras(String Restaurador) {
+    //Para Restauraciones
+     public java.util.List<AntiguidadeSimplif> obtenerObras(String Restaurador) {
         return gr.obtenerObras(Restaurador);
     }
+
+     public java.util.List<AntiguidadeSimplif> obtenerDemasObras(String titulo) {
+         return gr.obtenerDemasObras(titulo);
+    }
+      public java.util.List<AntiguidadeSimplif> obtenerTodasObras() {
+         return gr.obtenerTodasObras();
+    }
+    public void insertaRestauracion(Integer CodObra, String Restaurador){
+        gr.insertaRestauracion(CodObra, Restaurador);
+    }
     
+    public void finalizaRestauracion(Integer CodObra, String Restaurador){
+        gr.finalizaRestauracion(CodObra, Restaurador);
+    }
 }

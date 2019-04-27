@@ -5,6 +5,8 @@
 
 package baseDatos;
 
+import aplicacion.Antiguidade;
+import aplicacion.AntiguidadeSimplif;
 import aplicacion.Autor;
 import aplicacion.Obra;
 import aplicacion.Usuario;
@@ -54,8 +56,10 @@ public class FachadaBaseDatos {
                     usuario);
 
             daoUsuarios = new DAOUsuarios(conexion, fa);
-          
-
+            daorestauracion = new DAORestauracion(conexion, fa);
+            daoAutores = new DAOAutores(conexion, fa);
+            daoSuministradores = new DAOSuministradores(conexion, fa);
+            
 
         } catch (FileNotFoundException f){
             System.out.println(f.getMessage());
@@ -132,7 +136,24 @@ public class FachadaBaseDatos {
     public java.util.List<Autor> consultarAutores(){
         return daoAutores.consultarAutores();
     } 
-   public java.util.List<Obra> obtenerObras(String Restaurador) {
+    //Gestion de Restauracion
+   public java.util.List<AntiguidadeSimplif> obtenerObras(String Restaurador) {
+       System.out.println("fbd");
              return daorestauracion.obtenerObras(Restaurador);
     }
+   public java.util.List<AntiguidadeSimplif> obtenerDemasObras(String titulo) {
+       //System.out.println("fbd");
+        return daorestauracion.obtenerDemasObras(titulo);
+    }
+   public void insertaRestauracion(Integer CodObra, String Restaurador){
+       if(daorestauracion.existeRestauracion(CodObra)==false)
+        daorestauracion.realizarRestauracion(CodObra, Restaurador);
+    }
+   public java.util.List<AntiguidadeSimplif> obtenerTodasObras() {
+         return daorestauracion.obtenerTodasObras();
+    }
+   public void finalizaRestauracion(Integer CodObra, String Restaurador){
+        daorestauracion.finalizaRestauracion(CodObra, Restaurador);
+    }
+   
 }
