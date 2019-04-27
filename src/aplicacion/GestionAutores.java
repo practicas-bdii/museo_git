@@ -25,4 +25,20 @@ public class GestionAutores {
     public java.util.List<Autor> obtenerAutores(){
         return fbd.consultarAutores();
     }
+    
+     public void verAutores(){
+        fgui.verAutores();
+    }
+     
+    public void actualizarAutor(String nome, Autor a){
+        fbd.actualizarAutor(nome, a);
+    }
+
+    public void insertarAutor(Autor a){
+        fbd.insertarAutor(a);
+    }
+    
+    public void borrarAutor(String nome){
+        fbd.borrarAutor(nome);
+    }
 }

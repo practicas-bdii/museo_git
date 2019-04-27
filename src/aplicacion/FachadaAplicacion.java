@@ -39,14 +39,14 @@ public class FachadaAplicacion {
         fgui.muestraExcepcion(e);
     }
 
-//Chama a ao metodo da clase GestionUsuarios
+    //Chama a ao metodo da clase GestionUsuarios
     public java.util.List<Usuario> obtenerUsuarios(String id, String nombre) {
         return cu.obtenerUsuarios(id, nombre);
     }
 
     ;
-//gestion de usuarios
-public int comprobarAutentificacion(String idUsuario, String clave) {
+    //gestion de usuarios
+    public int comprobarAutentificacion(String idUsuario, String clave) {
         return cu.comprobarAutentificacion(idUsuario, clave);
     }
 
@@ -80,6 +80,9 @@ public int comprobarAutentificacion(String idUsuario, String clave) {
     
     
     //Gestion SUMINISTRADORES
+    public void verAdquirir(){
+        cs.adminAdquirir();
+    }
     
     public java.util.List<Suministrador> obtenerSumins(String cif){
       return cs.obtenerSumins(cif);
@@ -97,12 +100,29 @@ public int comprobarAutentificacion(String idUsuario, String clave) {
         cs.borrarSuministrador(cif);
     }
     
-    public void verAdminSumin(){
-        cs.verAdminSumin();
+    public void verSumin(){
+        cs.verSumin();
     }
 
+    //Gestion AUTORES
+     public void verAutores(){
+        cs.adminAdquirir();
+    }
+    
     public java.util.List<Autor> obtenerAutores(){
         return ca.obtenerAutores();
     }  
+    
+    public void actualizarAutor(String nome, Autor a){
+        ca.actualizarAutor(nome, a);
+    }
+
+    public void insertarAutor(Autor a){
+        ca.insertarAutor(a);
+    }
+    
+    public void borrarAutor(String nome){
+        ca.borrarAutor(nome);
+    }
     
 }

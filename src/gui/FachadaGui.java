@@ -4,8 +4,7 @@
  */
 package gui;
 
-//import aplicacion.Categoria;
-//import aplicacion.Libro;
+import aplicacion.Suministrador;
 
 /**
  *
@@ -14,18 +13,18 @@ package gui;
 public class FachadaGui {
     aplicacion.FachadaAplicacion fa;
     VPrincipal vp;
-    VUsuario vu;//obxeto da ventana de usuarios
     VAdmin vadmin;
-    VRestaurador vrest;
-    VComprarObra vcomprar;
+    //VUsuario vu;//obxeto da ventana de usuarios
+    //VAutores 
+    //VRestaurador vrest;
+    //VAdquirir vadquirir;
     
    public FachadaGui(aplicacion.FachadaAplicacion fa){
      this.fa=fa;
-     this.vp = new VPrincipal(fa);
-     this.vu = new VUsuario(fa);//instanciar a ventana
      this.vadmin=new VAdmin(fa);
-     this.vrest = new VRestaurador(fa);
-     this.vcomprar= new VComprarObra(fa);
+     // this.vu = new VUsuario(fa);//instanciar a ventana
+     //this.vrest = new VRestaurador(fa);
+     //this.vadquirir= new VAdquirir(fa);
      
    } 
     
@@ -39,8 +38,8 @@ public class FachadaGui {
         va.setVisible(true);
         //vu.setVisible(false);
         vadmin.setVisible(true);
-        vrest.setVisible(false);
-        //vcomprar.setVisible(false);
+        //vrest.setVisible(false);
+        //vadquirir.setVisible(true);
     }
     
    
@@ -53,21 +52,38 @@ public class FachadaGui {
     }
 
     public void verAdminUsuarios(){
-       vadmin.setVisible(true);
+    //   vadmin.setVisible(true);
         System.out.println("ver admin");
     
     }
     
     public void verRestauracion(){
-       vrest.setVisible(true);
+    //   vrest.setVisible(true);
     }
-    
-    public void verComprar(){
-        vcomprar.setVisible(true);
-    }
-    
+        
     public void verUsuarios(){
-        vu.setVisible(true);
+    //    vu.setVisible(true);
+    }
+    
+    public void verAdquirir(){
+        VAdquirir vad;
+        
+        vad = new VAdquirir(fa);
+        vad.setVisible(true);
+    }
+    
+    public void verAutores(){
+        VAutor vau;
+        
+        vau = new VAutor(fa);
+        vau.setVisible(true);
+    }
+    
+    public void verSumin(){
+        VSumins vs;
+        
+        vs = new VSumins(fa);
+        vs.setVisible(true);
     }
    
 }

@@ -48,7 +48,7 @@ public class VAdmin extends javax.swing.JDialog {
         jFrame1 = new javax.swing.JFrame();
         jFrame2 = new javax.swing.JFrame();
         btnCerrar = new javax.swing.JButton();
-        btnCompraObra = new javax.swing.JButton();
+        btnAdquirirObra = new javax.swing.JButton();
         btnAutores = new javax.swing.JButton();
         btnUsuarios = new javax.swing.JButton();
         btnObras = new javax.swing.JButton();
@@ -85,14 +85,19 @@ public class VAdmin extends javax.swing.JDialog {
             }
         });
 
-        btnCompraObra.setText("Comprar Obra");
-        btnCompraObra.addActionListener(new java.awt.event.ActionListener() {
+        btnAdquirirObra.setText("Adquirir Obra");
+        btnAdquirirObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCompraObraActionPerformed(evt);
+                btnAdquirirObraActionPerformed(evt);
             }
         });
 
         btnAutores.setText("Gestión Autores");
+        btnAutores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutoresActionPerformed(evt);
+            }
+        });
 
         btnUsuarios.setText("Gestión Usuarios");
         btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +109,11 @@ public class VAdmin extends javax.swing.JDialog {
         btnObras.setText("Gestión Obras");
 
         btnSuministradores.setText("Gestión Suministradores");
+        btnSuministradores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuministradoresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +137,7 @@ public class VAdmin extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnObras, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCompraObra)))
+                                .addComponent(btnAdquirirObra)))
                         .addGap(39, 39, 39))))
         );
         layout.setVerticalGroup(
@@ -136,7 +146,7 @@ public class VAdmin extends javax.swing.JDialog {
                 .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnObras)
-                    .addComponent(btnCompraObra))
+                    .addComponent(btnAdquirirObra))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAutores)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -156,14 +166,24 @@ public class VAdmin extends javax.swing.JDialog {
         System.exit(0);
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void btnCompraObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraObraActionPerformed
+    private void btnAdquirirObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdquirirObraActionPerformed
         //facer visible a tabla ventana de comprar
-        fa.getFachada().verComprar();
-    }//GEN-LAST:event_btnCompraObraActionPerformed
+        fa.verAdquirir();
+    }//GEN-LAST:event_btnAdquirirObraActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         fa.getFachada().verUsuarios();
     }//GEN-LAST:event_btnUsuariosActionPerformed
+
+    private void btnAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoresActionPerformed
+        // TODO add your handling code here:
+        fa.verAutores();
+    }//GEN-LAST:event_btnAutoresActionPerformed
+
+    private void btnSuministradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuministradoresActionPerformed
+        // TODO add your handling code here:
+        fa.verSumin();
+    }//GEN-LAST:event_btnSuministradoresActionPerformed
 
     
     /**
@@ -171,9 +191,9 @@ public class VAdmin extends javax.swing.JDialog {
      */
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdquirirObra;
     private javax.swing.JButton btnAutores;
     private javax.swing.JButton btnCerrar;
-    private javax.swing.JButton btnCompraObra;
     private javax.swing.JButton btnObras;
     private javax.swing.JButton btnSuministradores;
     private javax.swing.JButton btnUsuarios;
