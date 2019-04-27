@@ -153,7 +153,8 @@ public class VAutentificacion extends javax.swing.JDialog {
             if (admin == 1) {
                 fa.getFachada().verAdminUsuarios();
             } else {
-                fa.getFachada().verRestauracion();
+                fa.getFachada().setVrest(new VRestaurador(fa,textoUsuario.getText()));
+                fa.getFachada().verRestauracion();  
             }
             this.dispose();
         } else {

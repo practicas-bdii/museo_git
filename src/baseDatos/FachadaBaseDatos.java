@@ -6,6 +6,7 @@
 package baseDatos;
 
 import aplicacion.Autor;
+import aplicacion.Obra;
 import aplicacion.Usuario;
 import aplicacion.TipoUsuario;
 import aplicacion.Suministrador;
@@ -26,6 +27,7 @@ public class FachadaBaseDatos {
     private DAOUsuarios daoUsuarios;
     private DAOSuministradores daoSuministradores;
     private DAOAutores daoAutores;
+    private DAORestauracion daorestauracion;
     
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
         
@@ -130,5 +132,7 @@ public class FachadaBaseDatos {
     public java.util.List<Autor> consultarAutores(){
         return daoAutores.consultarAutores();
     } 
-   
+   public java.util.List<Obra> obtenerObras(String Restaurador) {
+             return daorestauracion.obtenerObras(Restaurador);
+    }
 }

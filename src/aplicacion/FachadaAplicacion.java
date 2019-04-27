@@ -15,6 +15,7 @@ public class FachadaAplicacion {
     GestionUsuarios cu;
     GestionSuministradores cs;
     GestionAutores ca;
+    GestionRestauraciones gr;
 
     public FachadaAplicacion() {
         fgui = new gui.FachadaGui(this);
@@ -103,6 +104,9 @@ public int comprobarAutentificacion(String idUsuario, String clave) {
 
     public java.util.List<Autor> obtenerAutores(){
         return ca.obtenerAutores();
-    }  
+    }
+     public java.util.List<Obra> obtenerObras(String Restaurador) {
+        return gr.obtenerObras(Restaurador);
+    }
     
 }

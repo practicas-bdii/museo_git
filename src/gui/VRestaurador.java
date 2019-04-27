@@ -18,14 +18,23 @@ public class VRestaurador extends javax.swing.JDialog {
      * Creates new form VAviso
      */
     private aplicacion.FachadaAplicacion fa;
-   // private String IDUsuario;
-    
+    private String IDRestaurador;
     
     
     public VRestaurador(aplicacion.FachadaAplicacion fa) {
         this.fa=fa;
         initComponents();
         this.setTitle("Menú de Restauracióon");
+        //this.setVisible(false);
+        //btnGuardar.setEnabled(false);
+    }
+    
+    public VRestaurador(aplicacion.FachadaAplicacion fa, String Restaurador) {
+        this.fa=fa;
+        initComponents();
+        this.setTitle("Menú de Restauracióon");
+        this.IDRestaurador=Restaurador;
+        System.out.println("Loggeado como:"+IDRestaurador);
         //this.setVisible(false);
         //btnGuardar.setEnabled(false);
     }
@@ -50,9 +59,9 @@ public class VRestaurador extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         campoObra = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaUsers = new javax.swing.JTable();
+        tablaTusObras = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -117,15 +126,20 @@ public class VRestaurador extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Seleccionar");
-
-        TablaUsers.setModel(new ModeloTablaTusObras());
-        TablaUsers.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
-            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
-                TablaUsersMouseWheelMoved(evt);
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(TablaUsers);
+
+        tablaTusObras.setModel(new ModeloTablaTusObras());
+        tablaTusObras.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                tablaTusObrasMouseWheelMoved(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaTusObras);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,25 +148,24 @@ public class VRestaurador extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(239, 239, 239)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)))
+                        .addGap(205, 205, 205)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoObra, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(campoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43)
                         .addComponent(jButton2)
-                        .addGap(0, 154, Short.MAX_VALUE)))
+                        .addGap(0, 188, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnBuscar)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -160,23 +173,20 @@ public class VRestaurador extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(13, 13, 13))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(campoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
-                                .addGap(1, 1, 1)))
+                        .addComponent(btnBuscar)
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(campoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(4, 4, 4)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addContainerGap(36, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(33, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(42, 42, 42))))
@@ -317,11 +327,12 @@ public class VRestaurador extends javax.swing.JDialog {
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void TablaUsersMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_TablaUsersMouseWheelMoved
+    private void tablaTusObrasMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_tablaTusObrasMouseWheelMoved
 
-    }//GEN-LAST:event_TablaUsersMouseWheelMoved
+    }//GEN-LAST:event_tablaTusObrasMouseWheelMoved
 
     private void campoObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoObraActionPerformed
         // TODO add your handling code here:
@@ -347,20 +358,29 @@ public class VRestaurador extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        ModeloTablaTusObras m;
+        //Usuario primero;
+        m=(ModeloTablaTusObras) tablaTusObras.getModel();
+        m.setFilas(fa.obtenerObras(this.IDRestaurador));
+        //(buscaId.getText().isEmpty())?null:Integer.parseInt(buscaId.getText())
+        if (m.getRowCount() > 0)
+            tablaTusObras.setRowSelectionInterval(0, 0);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     
     /**
      * @param args the command line arguments
      */
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaUsers;
     private javax.swing.JTable TablaUsers1;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JTextField campoEstado;
     private javax.swing.JTextField campoEstado1;
     private javax.swing.JTextField campoObra;
     private javax.swing.JTextField campoObra1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -381,6 +401,7 @@ public class VRestaurador extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tablaTusObras;
     // End of variables declaration//GEN-END:variables
 
 
