@@ -21,7 +21,7 @@ public class FachadaGui {
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
         this.vp = new VPrincipal(fa);
-        this.vu = new VUsuario(fa);//instanciar a ventana
+        //this.vu = new VUsuario(fa);//instanciar a ventana
         this.vadmin = new VAdmin(fa);
         this.vrest = new VRestaurador(fa);
         this.vcomprar = new VComprarObra(fa);
@@ -62,30 +62,32 @@ public class FachadaGui {
         vcomprar.setVisible(true);
     }
 
+    /*
     public void verUsuarios() {
         vu.setVisible(true);
-
-    public void verAdquirir(){
+    }*/
+    public void verAdquirir() {
         VAdquirir vad;
-        
+
         vad = new VAdquirir(fa);
         vad.setVisible(true);
     }
-    
-    public void verAutores(){
+
+    public void verAutores() {
         VAutor vau;
-        
+
         vau = new VAutor(fa);
         vau.setVisible(true);
     }
-    
-    public void verSumin(){
+
+    public void verSumin() {
         VSumins vs;
-        
+
         vs = new VSumins(fa);
         vs.setVisible(true);
     }
-    public String esRestaurador(String idRestaurador){
+
+    public String esRestaurador(String idRestaurador) {
         return idRestaurador;
     }
 
