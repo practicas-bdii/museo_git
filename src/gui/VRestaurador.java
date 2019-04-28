@@ -2,31 +2,32 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 //Obxetivo: Dar de alta novos usuario, Dar de baixa usuarios existentes e Editar información dos existentes 
 /*Por ahora: busca tus obras, inserta obras(realizar restauracion) si son antiguidades <-hacer que se seleccione,
         buscar todas obras y filtrar por nombre si quieres, lo dejé en finalizar restauracion que falla en algo
     Me hace falta obtener la fecha actual para completar e realizar y finalizar restaurador
 */
-
 package gui;
+
 import aplicacion.Usuario;
 import javax.swing.ComboBoxModel;
 import aplicacion.TipoUsuario;
+
 /**
  *
  * @author alumno
  */
-public class VRestaurador extends javax.swing.JDialog {
+public class VRestaurador extends javax.swing.JFrame {
 
     /**
      * Creates new form VAviso
      */
     private aplicacion.FachadaAplicacion fa;
     private String IDRestaurador;
-    
-    
+
     public VRestaurador(aplicacion.FachadaAplicacion fa) {
-        this.fa=fa;
+        this.fa = fa;
         initComponents();
         this.setTitle("Menú de Restauracióon");
         //this.setVisible(false);
@@ -446,11 +447,9 @@ public class VRestaurador extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoCodigo2ActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */
-   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FinalizarObra;
     private javax.swing.JButton RelizarRest;
@@ -484,7 +483,5 @@ public class VRestaurador extends javax.swing.JDialog {
     private javax.swing.JTable tablaTusObras;
     // End of variables declaration//GEN-END:variables
 
-
-    
-
+    public void buscarUsuarios() {
 }

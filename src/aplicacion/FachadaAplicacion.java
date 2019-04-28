@@ -12,6 +12,7 @@ public class FachadaAplicacion {
 
     gui.FachadaGui fgui;
     baseDatos.FachadaBaseDatos fbd;
+    GestionObras co;
     GestionUsuarios cu;
     GestionSuministradores cs;
     GestionAutores ca;
@@ -20,10 +21,13 @@ public class FachadaAplicacion {
     public FachadaAplicacion() {
         fgui = new gui.FachadaGui(this);
         fbd = new baseDatos.FachadaBaseDatos(this);
+        co = new GestionObras(fgui, fbd);
         cu = new GestionUsuarios(fgui, fbd);
+      
         cs = new GestionSuministradores(fgui,fbd);
         ca = new GestionAutores(fgui,fbd);
         gr = new GestionRestauraciones(fgui, fbd);
+
     }
 
     public static void main(String args[]) {
@@ -74,8 +78,7 @@ public class FachadaAplicacion {
     public gui.FachadaGui getFachada() {
         return this.fgui;
     }
-    
-    
+
     //Gestion SUMINISTRADORES
     public void verAdquirir(){
         cs.adminAdquirir();
@@ -89,12 +92,20 @@ public class FachadaAplicacion {
         cs.actualizarSuministrador(cif, s);
     }
 
-    public void insertarSuministrador(Suministrador s){
+    public void insertarSuministrador(Suministrador s) {
         cs.insertarSuministrador(s);
     }
-    
-    public void borrarSuministrador(String cif){
+
+    public void borrarSuministrador(String cif) {
         cs.borrarSuministrador(cif);
+    }
+
+    public void visualizarObras() {
+        co.visualizarObras();
+    }
+
+    public java.util.List<Obra> obtenerObras(Integer codigo, String titulo, Integer ano, String autor, String sala, String tipo) {
+        return co.obtenerObras(codigo, titulo, ano, autor, sala, tipo);
     }
     
     public void verSumin(){
@@ -110,7 +121,7 @@ public class FachadaAplicacion {
         return ca.obtenerAutores();
     }
     //Para Restauraciones
-     public java.util.List<AntiguidadeSimplif> obtenerObras(String Restaurador) {
+     public java.util.List<AntiguidadeSimplif> obtenerObrasRestaurador(String Restaurador) {
         return gr.obtenerObras(Restaurador);
     }
 
@@ -140,5 +151,4 @@ public class FachadaAplicacion {
     public void finalizaRestauracion(Integer CodObra, String Restaurador){
         gr.finalizaRestauracion(CodObra, Restaurador);
     }
-
 }

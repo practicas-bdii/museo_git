@@ -13,20 +13,20 @@ import java.sql.*;
  * @author alumnogreibd
  */
 public class DAOAutores extends AbstractDAO {
-    
-    public DAOAutores (Connection conexion, aplicacion.FachadaAplicacion fa){
+
+    public DAOAutores(Connection conexion, aplicacion.FachadaAplicacion fa) {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
-    
-    public java.util.List<Autor> consultarAutores(){
+
+    public java.util.List<Autor> consultarAutores() {
         java.util.List<Autor> resultado = new java.util.ArrayList<Autor>();
         Autor autorActual;
         Connection con;
-        PreparedStatement stmCategorias=null;
+        PreparedStatement stmCategorias = null;
         ResultSet rsAutores;
 
-        con=this.getConexion();
+        con = this.getConexion();
 
         try  {
         stmCategorias=con.prepareStatement("select * from autores");
@@ -38,11 +38,15 @@ public class DAOAutores extends AbstractDAO {
             resultado.add(autorActual);
         }
 
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmCategorias.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCategorias.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
         return resultado;
     }
@@ -121,6 +125,4 @@ public class DAOAutores extends AbstractDAO {
         }
         
     }
-    
-    
 }
