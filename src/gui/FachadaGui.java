@@ -37,6 +37,7 @@ public class FachadaGui {
         //vp.setVisible(true);
         va.setVisible(true);
         //vu.setVisible(false);
+
         vadmin.setVisible(true);
         //vrest.setVisible(false);
         //vadquirir.setVisible(true);
@@ -84,6 +85,13 @@ public class FachadaGui {
         
         vs = new VSumins(fa);
         vs.setVisible(true);
+    }
+    public String esRestaurador(String idRestaurador){
+        return idRestaurador;
+    }
+
+    public void setVrest(VRestaurador vrest) {
+        this.vrest = vrest;
     }
    
 }

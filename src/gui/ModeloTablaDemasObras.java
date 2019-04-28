@@ -4,6 +4,7 @@
  */
 
 package gui;
+import aplicacion.AntiguidadeSimplif;
 import aplicacion.Obra;
 import javax.swing.table.*;
 /**
@@ -11,14 +12,14 @@ import javax.swing.table.*;
  * @author basesdatos
  */
 public class ModeloTablaDemasObras extends AbstractTableModel{
-    private java.util.List<Obra> obras;
+    private java.util.List<AntiguidadeSimplif> obras;
 
     public ModeloTablaDemasObras(){
-        this.obras=new java.util.ArrayList<Obra>();
+        this.obras=new java.util.ArrayList<AntiguidadeSimplif>();
     }
 
     public int getColumnCount (){
-        return 4;
+        return 3;
     }
 
     public int getRowCount(){
@@ -44,7 +45,7 @@ public class ModeloTablaDemasObras extends AbstractTableModel{
         switch (col){
             case 0: clase= java.lang.String.class; break;
             case 1: clase= java.lang.String.class; break;
-            case 2: clase= java.lang.String.class; break;
+            case 2: clase= java.lang.Integer.class; break;
         }
         return clase;
     }
@@ -58,20 +59,20 @@ public class ModeloTablaDemasObras extends AbstractTableModel{
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= obras.get(row).getTitulo(); break;
-            //case 1: resultado= obras.get(row).getNombre(); break;//estado
-            //case 2: resultado=obras.get(row).getEmail();break;//fecha inicio
+            case 0: resultado= obras.get(row).getNombre(); break;
+            case 1: resultado= obras.get(row).getEstado(); break;//estado
+            case 2: resultado=obras.get(row).getCodigo();break;//fecha inicio
             //case 3: resultado=obras.get(row).getTipoUsuario(); break;//fecha fin
         }
         return resultado;
     }
 
-    public void setFilas(java.util.List<Obra> obras){
+    public void setFilas(java.util.List<AntiguidadeSimplif> obras){
         this.obras=obras;
         fireTableDataChanged();
     }
 
-    public Obra obtenerUsuario(int i){
+    public AntiguidadeSimplif obtenerUsuario(int i){
         return this.obras.get(i);
     }
 

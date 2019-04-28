@@ -33,6 +33,7 @@ public class DAOAutores extends AbstractDAO {
         rsAutores = stmCategorias.executeQuery();
         while (rsAutores.next())
         {
+
             autorActual = new Autor(rsAutores.getString("nome"), rsAutores.getDate("fecha_nac"), rsAutores.getDate("fecha_fal"));
             resultado.add(autorActual);
         }
