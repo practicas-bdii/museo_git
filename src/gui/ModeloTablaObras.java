@@ -4,7 +4,11 @@
  */
 package gui;
 
+import aplicacion.Antiguidade;
+import aplicacion.Escultura;
 import aplicacion.Obra;
+import aplicacion.Pintura;
+import java.util.Date;
 import javax.swing.table.*;
 
 /**
@@ -65,7 +69,7 @@ public class ModeloTablaObras extends AbstractTableModel {
                 clase = java.lang.String.class;
                 break;
             case 2:
-                clase = java.lang.String.class;
+                clase = aplicacion.Autor.class;
                 break;
             case 3:
                 clase = java.lang.Integer.class;
@@ -96,13 +100,20 @@ public class ModeloTablaObras extends AbstractTableModel {
                 resultado = obras.get(row).getTitulo();
                 break;
             case 2:
-              //  resultado = obras.get(row).getAutor();
+                resultado = obras.get(row).getAutores().get(0);
                 break;
             case 3:
                 resultado = obras.get(row).getAno();
                 break;
             case 4:
-                // usar instanceof resultado = obras.get(row).getTipo();
+                Obra tmp = obras.get(row);
+                if (tmp instanceof Pintura) {
+                    resultado = "pintura";
+                } else if (tmp instanceof Escultura) {
+                    resultado = "escultura";
+                } else { //cuando es inevitablemente instanceof Antiguidade
+                    resultado = "antguidade";
+                }
                 break;
             case 5:
                 resultado = obras.get(row).getSala();

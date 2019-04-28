@@ -2,38 +2,38 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//Obxetivo: Dar de alta novos usuario, Dar de baixa usuarios existentes e Editar información dos existentes 
+//Obxetivo: Dar de alta novos usuario, Dar de baixa usuarios existentes e Editar información dos existentes
 //Tense que abrir esta ventana unha vez se seleccionou a opcion administrar usuario da ventana administracion
 package gui;
+
 import aplicacion.Usuario;
 import javax.swing.ComboBoxModel;
 import aplicacion.TipoUsuario;
+
 /**
  *
  * @author alumno
  */
-public class VAdmin extends javax.swing.JDialog {
+public class VAdmin extends javax.swing.JFrame {
 
     /**
      * Creates new form VAviso
      */
     private aplicacion.FachadaAplicacion fa;
-   // private String IDUsuario;
-    
-    
-    
+    // private String IDUsuario;
+
     public VAdmin(aplicacion.FachadaAplicacion fa) {
-        this.fa=fa;
+        this.fa = fa;
         initComponents();
         this.setTitle("Menú de Administración");
         //this.setVisible(true);
         //btnGuardar.setEnabled(false);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     /**
@@ -102,6 +102,11 @@ public class VAdmin extends javax.swing.JDialog {
         });
 
         btnObras.setText("Gestión Obras");
+        btnObras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrasActionPerformed(evt);
+            }
+        });
 
         btnSuministradores.setText("Gestión Suministradores");
 
@@ -165,11 +170,13 @@ public class VAdmin extends javax.swing.JDialog {
         fa.getFachada().verUsuarios();
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
-    
+    private void btnObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrasActionPerformed
+        fa.visualizarObras();
+    }//GEN-LAST:event_btnObrasActionPerformed
+
     /**
      * @param args the command line arguments
      */
-   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAutores;
     private javax.swing.JButton btnCerrar;
@@ -181,14 +188,12 @@ public class VAdmin extends javax.swing.JDialog {
     private javax.swing.JFrame jFrame2;
     // End of variables declaration//GEN-END:variables
 
+    public void buscarUsuarios() {
 
-    
-    public void buscarUsuarios(){
-     
     }
-    
-    public void insertarUsuario(Usuario u){
-     
+
+    public void insertarUsuario(Usuario u) {
+
     }
-    
+
 }

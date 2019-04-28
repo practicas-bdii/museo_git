@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package baseDatos;
 
 import aplicacion.Autor;
+import aplicacion.Obra;
 import aplicacion.Usuario;
 import aplicacion.TipoUsuario;
 import aplicacion.Suministrador;
@@ -21,16 +21,18 @@ import java.util.Properties;
  * @author basesdatos
  */
 public class FachadaBaseDatos {
+
     private aplicacion.FachadaAplicacion fa;
     private java.sql.Connection conexion;
+    private DAOObras daoObras;
     private DAOUsuarios daoUsuarios;
     private DAOSuministradores daoSuministradores;
     private DAOAutores daoAutores;
-    
-    public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
-        
+
+    public FachadaBaseDatos(aplicacion.FachadaAplicacion fa) {
+
         Properties configuracion = new Properties();
-        this.fa=fa;
+        this.fa = fa;
         FileInputStream arqConfiguracion;
 
         try {
@@ -39,96 +41,95 @@ public class FachadaBaseDatos {
             arqConfiguracion.close();
 
             Properties usuario = new Properties();
-     
 
             String gestor = configuracion.getProperty("gestor");
 
             usuario.setProperty("user", configuracion.getProperty("usuario"));
             usuario.setProperty("password", configuracion.getProperty("clave"));
-            this.conexion=java.sql.DriverManager.getConnection("jdbc:"+gestor+"://"+
-                    configuracion.getProperty("servidor")+":"+
-                    configuracion.getProperty("puerto")+"/"+
-                    configuracion.getProperty("baseDatos"),
+            this.conexion = java.sql.DriverManager.getConnection("jdbc:" + gestor + "://"
+                    + configuracion.getProperty("servidor") + ":"
+                    + configuracion.getProperty("puerto") + "/"
+                    + configuracion.getProperty("baseDatos"),
                     usuario);
 
             daoUsuarios = new DAOUsuarios(conexion, fa);
-          
+            daoObras = new DAOObras(conexion, fa);
+            daoSuministradores = new DAOSuministradores(conexion, fa);
+            daoAutores = new DAOAutores(conexion, fa);
 
-
-        } catch (FileNotFoundException f){
+        } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
             fa.muestraExcepcion(f.getMessage());
-        } catch (IOException i){
+        } catch (IOException i) {
             System.out.println(i.getMessage());
             fa.muestraExcepcion(i.getMessage());
-        } 
-        catch (java.sql.SQLException e){
+        } catch (java.sql.SQLException e) {
             System.out.println(e.getMessage());
             fa.muestraExcepcion(e.getMessage());
         }
-        
-        
-        
+
     }
 
-
-    public Usuario validarUsuario(String idUsuario, String clave){
+    public Usuario validarUsuario(String idUsuario, String clave) {
         return daoUsuarios.validarUsuario(idUsuario, clave);
     }
 
-    
     //consultar usuarios, chamar ao DAO
-    public java.util.List<Usuario> consultarUsuarios(String id, String nombre){
+    public java.util.List<Usuario> consultarUsuarios(String id, String nombre) {
         return daoUsuarios.consultarUsuarios(id, nombre);
     }
-    
-    public void insertarUsuario(Usuario u){
+
+    public void insertarUsuario(Usuario u) {
         daoUsuarios.insertarUsuario(u);
     }
-    
-    public boolean existeUsuario(Usuario u){
-        if(daoUsuarios.existeUsuario(u)==true) System.out.print("Existe usuario");
-        else System.out.println("No Existe usuario");
+
+    public boolean existeUsuario(Usuario u) {
+        if (daoUsuarios.existeUsuario(u) == true) {
+            System.out.print("Existe usuario");
+        } else {
+            System.out.println("No Existe usuario");
+        }
         return daoUsuarios.existeUsuario(u);
-        
+
     }
-    
-    public void actualizarUsuario(Usuario u){
+
+    public void actualizarUsuario(Usuario u) {
         daoUsuarios.actualizaUsuario(u);
     }
-    
+
 //    public Usuario damePrimero(String idUsuario, String nombre){
 //        Usuario u;
 //        u=daoUsuarios.damePrimero(idUsuario, nombre);
 //        return u;
 //    }
-    
-    public void borrarUsuario(String idUsuario){
+    public void borrarUsuario(String idUsuario) {
         daoUsuarios.borrarUsuario(idUsuario);
     }
-    
+
     //Gestion SUMINISTRADORES
-    
-    public java.util.List<Suministrador> consultarSumins(String cif){
+    public java.util.List<Suministrador> consultarSumins(String cif) {
         return daoSuministradores.consultarSumins(cif);
     }
-    
-    public void actualizarSuministrador(String cif, Suministrador s){
+
+    public void actualizarSuministrador(String cif, Suministrador s) {
         daoSuministradores.actualizarSuministrador(cif, s);
     }
-    
-    public void insertarSuministrador(Suministrador s){
+
+    public void insertarSuministrador(Suministrador s) {
         daoSuministradores.insertarSuministrador(s);
     }
-    
-    public void borrarSuministrador(String cif){
+
+    public void borrarSuministrador(String cif) {
         daoSuministradores.borrarSuministrador(cif);
     }
-    
+
     //Gestion AUTORES
-    
-    public java.util.List<Autor> consultarAutores(){
+    public java.util.List<Autor> consultarAutores() {
         return daoAutores.consultarAutores();
-    } 
-   
+    }
+
+    public java.util.List<Obra> consultarCatalogo(Integer codigo, String titulo, Integer ano, String autor, String sala, String tipo) {
+        return daoObras.consultarCatalogo(codigo, titulo, ano, autor, sala, tipo);
+    }
+
 }

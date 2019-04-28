@@ -2,28 +2,28 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//Obxetivo: Dar de alta novos usuario, Dar de baixa usuarios existentes e Editar información dos existentes 
+//Obxetivo: Dar de alta novos usuario, Dar de baixa usuarios existentes e Editar información dos existentes
 //Tense que abrir esta ventana unha vez se seleccionou a opcion administrar usuario da ventana administracion
 package gui;
+
 import aplicacion.Usuario;
 import javax.swing.ComboBoxModel;
 import aplicacion.TipoUsuario;
+
 /**
  *
  * @author alumno
  */
-public class VRestaurador extends javax.swing.JDialog {
+public class VRestaurador extends javax.swing.JFrame {
 
     /**
      * Creates new form VAviso
      */
     private aplicacion.FachadaAplicacion fa;
-   // private String IDUsuario;
-    
-    
-    
+    // private String IDUsuario;
+
     public VRestaurador(aplicacion.FachadaAplicacion fa) {
-        this.fa=fa;
+        this.fa = fa;
         initComponents();
         this.setTitle("Menú de Restauracióon");
         //this.setVisible(false);
@@ -347,11 +347,9 @@ public class VRestaurador extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */
-   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaUsers;
     private javax.swing.JTable TablaUsers1;
@@ -383,14 +381,11 @@ public class VRestaurador extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
+    public void buscarUsuarios() {
 
-    
-    public void buscarUsuarios(){
-     
     }
 
-    
-    public void insertarUsuario(Usuario u){
-     
+    public void insertarUsuario(Usuario u) {
+
     }
 }
