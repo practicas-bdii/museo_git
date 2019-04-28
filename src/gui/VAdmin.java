@@ -177,7 +177,7 @@ public class VAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdquirirObraActionPerformed
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        fa.getFachada().verUsuarios();
+        //fa.getFachada().verUsuarios();
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrasActionPerformed

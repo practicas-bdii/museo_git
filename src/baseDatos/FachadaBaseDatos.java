@@ -31,8 +31,8 @@ public class FachadaBaseDatos {
     private DAOSuministradores daoSuministradores;
     private DAOAutores daoAutores;
     private DAORestauracion daorestauracion;
-    
-    public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
+
+    public FachadaBaseDatos(aplicacion.FachadaAplicacion fa) {
 
         Properties configuracion = new Properties();
         this.fa = fa;
@@ -136,36 +136,40 @@ public class FachadaBaseDatos {
         return daoObras.consultarCatalogo(codigo, titulo, ano, autor, sala, tipo);
     }
 
-    } 
-    
-    public void actualizarAutor(String nome, Autor a){
+    public void actualizarAutor(String nome, Autor a) {
         daoAutores.actualizarAutor(nome, a);
     }
 
-    public void insertarAutor(Autor a){
+    public void insertarAutor(Autor a) {
         daoAutores.insertarAutor(a);
     }
-    
-    public void borrarAutor(String nome){
-        daoAutores.borrarAutor(nome);
 
-    //Gestion de Restauracion
-   public java.util.List<AntiguidadeSimplif> obtenerObras(String Restaurador) {
-       System.out.println("fbd");
-             return daorestauracion.obtenerObras(Restaurador);
+    public void borrarAutor(String nome) {
+        daoAutores.borrarAutor(nome);
+        //Gestion de Restauracion
     }
-   public java.util.List<AntiguidadeSimplif> obtenerDemasObras(String titulo) {
-       //System.out.println("fbd");
+
+    public java.util.List<AntiguidadeSimplif> obtenerObras(String Restaurador) {
+        System.out.println("fbd");
+        return daorestauracion.obtenerObras(Restaurador);
+    }
+
+    public java.util.List<AntiguidadeSimplif> obtenerDemasObras(String titulo) {
+        //System.out.println("fbd");
         return daorestauracion.obtenerDemasObras(titulo);
     }
-   public void insertaRestauracion(Integer CodObra, String Restaurador){
-       if(daorestauracion.existeRestauracion(CodObra)==false)
-        daorestauracion.realizarRestauracion(CodObra, Restaurador);
+
+    public void insertaRestauracion(Integer CodObra, String Restaurador) {
+        if (daorestauracion.existeRestauracion(CodObra) == false) {
+            daorestauracion.realizarRestauracion(CodObra, Restaurador);
+        }
     }
-   public java.util.List<AntiguidadeSimplif> obtenerTodasObras() {
-         return daorestauracion.obtenerTodasObras();
+
+    public java.util.List<AntiguidadeSimplif> obtenerTodasObras() {
+        return daorestauracion.obtenerTodasObras();
     }
-   public void finalizaRestauracion(Integer CodObra, String Restaurador){
+
+    public void finalizaRestauracion(Integer CodObra, String Restaurador) {
         daorestauracion.finalizaRestauracion(CodObra, Restaurador);
     }
 
