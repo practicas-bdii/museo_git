@@ -143,6 +143,11 @@ public class VObras extends javax.swing.JDialog {
         );
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -217,6 +222,13 @@ public class VObras extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        ModeloTablaObras mto = (ModeloTablaObras) tablaObras.getModel();
+        int filaSeleccionada = tablaObras.getSelectedRow();
+        Obra edit = mto.obtenerObra(filaSeleccionada);
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
@@ -247,7 +259,7 @@ public class VObras extends javax.swing.JDialog {
         String tipo = String.valueOf(comboBoxTipo.getSelectedItem());
 
         mto.setFilas(fa.obtenerObras((campoCodigo.getText().isEmpty()) ? null : Integer.parseInt(campoCodigo.getText()), campoTitulo.getText(),
-                (campoAno.getText().isEmpty()) ? null : Integer.parseInt(campoCodigo.getText()), campoAutor.getText(),
+                (campoAno.getText().isEmpty()) ? null : Integer.parseInt(campoAno.getText()), campoAutor.getText(),
                 (campoSala.getText().isEmpty()) ? null : campoSala.getText(), tipo));
 
         if (mto.getRowCount() > 0) {

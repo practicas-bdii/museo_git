@@ -58,10 +58,7 @@ public class DAOObras extends AbstractDAO {
         }
 
         if (!autor.isEmpty()) {
-            consulta = consulta + " AND EXISTS (SELECT * "
-                    + " FROM autor_crea_obra as aoc"
-                    + " WHERE obra = " + codigo.toString()
-                    + " AND autor LIKE ?";
+            consulta = consulta + " AND autor LIKE ? ";
         }
 
         if (sala != null) {
@@ -131,6 +128,8 @@ public class DAOObras extends AbstractDAO {
                     compruebaNulo = rsObras.getString("autor");
                     if (!rsObras.wasNull()) {
                         autoresTmp = this.consultarAutores(rsObras.getString("autor"));
+                    } else {
+                        autoresTmp = null;
                     }
                     stmAntiguidades = con.prepareStatement("SELECT *"
                             + " FROM antiguidades"
@@ -140,7 +139,7 @@ public class DAOObras extends AbstractDAO {
 
                     while (rsAntiguidades.next()) {
                         antiguidadeTmp = new Antiguidade(TipoEstado.valueOf(rsAntiguidades.getString("estado")), rsAntiguidades.getInt("num_restauraciones"),
-                                rsAntiguidades.getInt("codigo"), rsObras.getString("titulo"), rsAntiguidades.getInt("ano"),
+                                rsObras.getInt("codigo"), rsObras.getString("titulo"), rsObras.getInt("ano"),
                                 rsObras.getString("sala"), autoresTmp);
 
                         resultado.add(antiguidadeTmp);

@@ -100,7 +100,11 @@ public class ModeloTablaObras extends AbstractTableModel {
                 resultado = obras.get(row).getTitulo();
                 break;
             case 2:
-                resultado = obras.get(row).getAutores().get(0);
+                if (obras.get(row).tieneAutor()) {
+                    resultado = obras.get(row).getAutores().get(0);
+                } else {
+                    resultado = "";
+                }
                 break;
             case 3:
                 resultado = obras.get(row).getAno();
@@ -127,7 +131,7 @@ public class ModeloTablaObras extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public Obra obtenerLibro(int i) {
+    public Obra obtenerObra(int i) {
         return this.obras.get(i);
     }
 
