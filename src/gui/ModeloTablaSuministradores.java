@@ -16,8 +16,7 @@ public class ModeloTablaSuministradores extends AbstractTableModel{
     
     public ModeloTablaSuministradores(){
         this.sumins=new java.util.ArrayList<Suministrador>();
-    }
-    
+    }    
     
     @Override
     public int getColumnCount(){

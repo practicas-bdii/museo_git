@@ -18,8 +18,8 @@ public class VAdquirir extends javax.swing.JDialog {
     aplicacion.FachadaAplicacion fa;
       
     
-    public VAdquirir(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
-        super(parent, modal);
+    public VAdquirir(aplicacion.FachadaAplicacion fa) {
+        //super(parent, modal);
         this.fa=fa;
         initComponents();
         
@@ -225,7 +225,7 @@ public class VAdquirir extends javax.swing.JDialog {
 
     private void btnEngadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEngadirActionPerformed
         // TODO add your handling code here:
-        fa.verAdminSumin();
+        fa.verSumin();
     }//GEN-LAST:event_btnEngadirActionPerformed
 
     private void listaAutoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaAutoresMouseClicked

@@ -136,6 +136,18 @@ public class FachadaBaseDatos {
     public java.util.List<Autor> consultarAutores(){
         return daoAutores.consultarAutores();
     } 
+    
+    public void actualizarAutor(String nome, Autor a){
+        daoAutores.actualizarAutor(nome, a);
+    }
+
+    public void insertarAutor(Autor a){
+        daoAutores.insertarAutor(a);
+    }
+    
+    public void borrarAutor(String nome){
+        daoAutores.borrarAutor(nome);
+
     //Gestion de Restauracion
    public java.util.List<AntiguidadeSimplif> obtenerObras(String Restaurador) {
        System.out.println("fbd");
