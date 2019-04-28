@@ -4,8 +4,8 @@
  */
 package gui;
 
-//import aplicacion.Categoria;
-//import aplicacion.Libro;
+import aplicacion.Suministrador;
+
 /**
  *
  * @author alumno
@@ -14,7 +14,6 @@ public class FachadaGui {
 
     aplicacion.FachadaAplicacion fa;
     VPrincipal vp;
-    VUsuario vu;//obxeto da ventana de usuarios
     VAdmin vadmin;
     VRestaurador vrest;
     VComprarObra vcomprar;
@@ -36,9 +35,10 @@ public class FachadaGui {
         //vp.setVisible(true);
         va.setVisible(true);
         //vu.setVisible(false);
+
         vadmin.setVisible(true);
-        vrest.setVisible(false);
-        //vcomprar.setVisible(false);
+        //vrest.setVisible(false);
+        //vadquirir.setVisible(true);
     }
 
     public void muestraExcepcion(String txtExcepcion) {
@@ -64,6 +64,33 @@ public class FachadaGui {
 
     public void verUsuarios() {
         vu.setVisible(true);
+
+    public void verAdquirir(){
+        VAdquirir vad;
+        
+        vad = new VAdquirir(fa);
+        vad.setVisible(true);
+    }
+    
+    public void verAutores(){
+        VAutor vau;
+        
+        vau = new VAutor(fa);
+        vau.setVisible(true);
+    }
+    
+    public void verSumin(){
+        VSumins vs;
+        
+        vs = new VSumins(fa);
+        vs.setVisible(true);
+    }
+    public String esRestaurador(String idRestaurador){
+        return idRestaurador;
+    }
+
+    public void setVrest(VRestaurador vrest) {
+        this.vrest = vrest;
     }
 
     public void visualizarGestionObras() {
