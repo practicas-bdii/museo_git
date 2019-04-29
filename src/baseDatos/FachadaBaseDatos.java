@@ -12,6 +12,7 @@ import aplicacion.Obra;
 import aplicacion.Usuario;
 import aplicacion.TipoUsuario;
 import aplicacion.Suministrador;
+import aplicacion.TipoEstado;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -148,12 +149,14 @@ public class FachadaBaseDatos {
    public void insertaRestauracion(Integer CodObra, String Restaurador){
        if(daorestauracion.existeRestauracion(CodObra)==false)
         daorestauracion.realizarRestauracion(CodObra, Restaurador);
+        daorestauracion.setEstadoAntigu(TipoEstado.restaurandose, CodObra);
     }
    public java.util.List<AntiguidadeSimplif> obtenerTodasObras() {
          return daorestauracion.obtenerTodasObras();
     }
-   public void finalizaRestauracion(Integer CodObra, String Restaurador){
+   public void finalizaRestauracion(Integer CodObra, String Restaurador, TipoEstado Estado){
         daorestauracion.finalizaRestauracion(CodObra, Restaurador);
+        daorestauracion.setEstadoAntigu(Estado, CodObra);
     }
    
 }
