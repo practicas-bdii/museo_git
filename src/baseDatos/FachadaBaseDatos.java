@@ -128,8 +128,8 @@ public class FachadaBaseDatos {
     }
 
     //Gestion AUTORES
-    public java.util.List<Autor> consultarAutores() {
-        return daoAutores.consultarAutores();
+    public java.util.List<Autor> consultarAutores(String nome) {
+        return daoAutores.consultarAutores(nome);
 
     }
 

@@ -16,7 +16,7 @@ public class FachadaGui {
     VPrincipal vp;
     VAdmin vadmin;
     VRestaurador vrest;
-    VComprarObra vcomprar;
+    VAdquirir vadquirir;
 
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
@@ -24,7 +24,7 @@ public class FachadaGui {
         //this.vu = new VUsuario(fa);//instanciar a ventana
         this.vadmin = new VAdmin(fa);
         this.vrest = new VRestaurador(fa);
-        this.vcomprar = new VComprarObra(fa);
+        this.vadquirir = new VAdquirir(fa);
 
     }
 
@@ -59,7 +59,7 @@ public class FachadaGui {
     }
 
     public void verComprar() {
-        vcomprar.setVisible(true);
+        vadquirir.setVisible(true);
     }
 
     /*

@@ -23,7 +23,7 @@ public class VAdquirir extends javax.swing.JDialog {
         this.fa=fa;
         initComponents();
         
-     //   buscarAutores();
+       // buscarAutores();
        
     }
 
@@ -290,8 +290,8 @@ public class VAdquirir extends javax.swing.JDialog {
         mla=(ModeloListaAutores) listaAutores.getModel();
         java.util.List<Autor> l;
         
-        l = fa.obtenerAutores();
-        mla.setAutores(l);
+       // l = fa.obtenerAutores();
+        //mla.setAutores(l);
     }
 
 }
