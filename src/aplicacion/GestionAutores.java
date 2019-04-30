@@ -25,6 +25,10 @@ public class GestionAutores {
     public java.util.List<Autor> obtenerAutores() {
         return fbd.consultarAutores();
     }
+  
+    public java.util.List<Autor> obtenerAutores(String nome){
+        return fbd.consultarAutores(nome);
+    }
 
     public java.util.List<Autor> obtenerAutores(int idObra) {
         return fbd.consultarAutores(idObra);

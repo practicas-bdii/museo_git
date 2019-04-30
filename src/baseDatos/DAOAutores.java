@@ -7,6 +7,8 @@ package baseDatos;
 
 import aplicacion.Autor;
 import java.sql.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -19,18 +21,19 @@ public class DAOAutores extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-    public java.util.List<Autor> consultarAutores() {
+    public java.util.List<Autor> consultarAutores(String nome) {
         java.util.List<Autor> resultado = new java.util.ArrayList<Autor>();
         Autor autorActual;
         Connection con;
-        PreparedStatement stmCategorias = null;
+        PreparedStatement stmAutores = null;
         ResultSet rsAutores;
 
         con = this.getConexion();
 
         try  {
-        stmCategorias=con.prepareStatement("select * from autores");
-        rsAutores = stmCategorias.executeQuery();
+        stmAutores=con.prepareStatement("select * from autores where nome like ?");
+        stmAutores.setString(1, "%"+nome+"%");
+        rsAutores = stmAutores.executeQuery();
         while (rsAutores.next())
         {
 
@@ -43,7 +46,7 @@ public class DAOAutores extends AbstractDAO {
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         } finally {
             try {
-                stmCategorias.close();
+                stmAutores.close();
             } catch (SQLException e) {
                 System.out.println("Imposible cerrar cursores");
             }
@@ -54,7 +57,7 @@ public class DAOAutores extends AbstractDAO {
     public void actualizarAutor(String nome, Autor a){
         Connection con;
         PreparedStatement stmAutor = null;
-        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         con = this.getConexion();
         
         try {
@@ -64,8 +67,9 @@ public class DAOAutores extends AbstractDAO {
                                             "    fecha_fal=?, " +
                                             "    where nome = ?");
             stmAutor.setString(1, a.getNombre());
-           // stmAutor.setString(2, a.getFechaNacemento());
-          //  stmAutor.setString(3, a.getFechaFalecemento());
+            stmAutor.setString(2, sdf.format(a.getFechaNacemento()));
+            stmAutor.setString(3, sdf.format(a.getFechaFalecemento()));
+            stmAutor.setString(4, nome);
             stmAutor.executeUpdate();
             
             
@@ -79,12 +83,11 @@ public class DAOAutores extends AbstractDAO {
         }
     }
     
-    
-    
-    
     public void insertarAutor(Autor a){
         Connection con;
         PreparedStatement stmAutor = null;
+        long millis=System.currentTimeMillis();  
+        java.sql.Date date=new java.sql.Date(millis);
     
         con = this.getConexion();
         
@@ -93,8 +96,8 @@ public class DAOAutores extends AbstractDAO {
             stmAutor=con.prepareStatement("insert into autores"+
                                          "values (?,?,?)");
             stmAutor.setString(1, a.getNombre());
-           // stmAutor.setString(2, a.getFechaNacemento());
-           // stmAutor.setString(3, a.getFechaFalecemento());
+          //  stmAutor.setString(2, (Date) a.getFechaNacemento());
+           // stmAutor.setString(3, 0);
             stmAutor.executeUpdate();
             
                     

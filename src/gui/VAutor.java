@@ -7,6 +7,7 @@ package gui;
 
 import aplicacion.Autor;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -246,6 +247,7 @@ public class VAutor extends javax.swing.JDialog {
         // TODO add your handling code here:
         Autor  a;
         ModeloTablaAutores mta;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         
         //Asignamos a variable a taboa
         mta=(ModeloTablaAutores)tablaAutores.getModel();
@@ -255,8 +257,8 @@ public class VAutor extends javax.swing.JDialog {
         
         //Asignamos aos campos de texto os correspondentes ao seleccionado na taboa
         nomeAutor.setText(a.getNombre());
-      //  dataNac.setText(a.getFechaNacemento());
-      //  dataFal.setText(a.getFechaFalecemento());
+        dataNac.setText(sdf.format(a.getFechaNacemento()));
+        dataFal.setText(sdf.format(a.getFechaFalecemento()));
     }//GEN-LAST:event_tablaAutoresMouseClicked
 
 
@@ -283,12 +285,12 @@ public class VAutor extends javax.swing.JDialog {
      
         mta =(ModeloTablaAutores) tablaAutores.getModel();
         java.util.List<Autor> f;
-        mta.setFilas((f= fa.obtenerAutores()));
+        mta.setFilas((f= fa.obtenerAutores(textoNome.getText())));
         
         if (mta.getRowCount()>0){
                 tablaAutores.setRowSelectionInterval(0, 0);
                 nomeAutor.setText(f.get(0).getNombre());
-                //dataNac.setText(f.get(0).getFechaNacemento());
+               // dataNac.setText(f.get(0).getFechaNacemento());
                 btnBorrarU.setEnabled(true);
                 btnGuardarU.setEnabled(true);
         }

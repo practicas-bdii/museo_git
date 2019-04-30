@@ -121,12 +121,15 @@ public class FachadaAplicacion {
     }
 
     //Gestion AUTORES
-    public void verAutores() {
-        cs.adminAdquirir();
-    }
-
     public java.util.List<Autor> obtenerAutores() {
         return ca.obtenerAutores();
+
+     public void verAutores(){
+        ca.verAutores();
+    }
+    
+    public java.util.List<Autor> obtenerAutores(String nome){
+        return ca.obtenerAutores(nome);
     }
 
     public java.util.List<Autor> obtenerAutores(int idObra) {
@@ -154,7 +157,11 @@ public class FachadaAplicacion {
         gr.insertaRestauracion(CodObra, Restaurador);
     }
 
-    public void actualizarAutor(String nome, Autor a) {
+    public void finalizaRestauracion(Integer CodObra, String Restaurador, TipoEstado Estado){
+        gr.finalizaRestauracion(CodObra, Restaurador, Estado);
+    }
+  
+    public void actualizarAutor(String nome, Autor a){
         ca.actualizarAutor(nome, a);
     }
 

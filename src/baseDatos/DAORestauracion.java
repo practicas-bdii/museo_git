@@ -46,16 +46,17 @@ public class DAORestauracion extends AbstractDAO {
       PreparedStatement stmRestauracion=null;
 
         con=super.getConexion();
-        Date date= new Date(1999-04-07);
+        long millis=System.currentTimeMillis();  
+        java.sql.Date date=new java.sql.Date(millis); 
+        System.out.println("date:"+date);
         try {
         stmRestauracion=con.prepareStatement("insert into restauracions(antiguidade, traballador, fecha_ini, fecha_fin) "+
                                       " values (?,?,?,?)");
-       // stmUsuario.setString(1, usuario.getIdUsuario());
         stmRestauracion.setInt(1, codObra);
         stmRestauracion.setString(2, codTraballador);
         stmRestauracion.setDate(3, date);
         stmRestauracion.setDate(4, null);
-       
+        System.out.println(stmRestauracion.toString());
         stmRestauracion.executeUpdate();
   
         } catch (SQLException e){
@@ -64,7 +65,6 @@ public class DAORestauracion extends AbstractDAO {
         }finally{
           try {stmRestauracion.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
-        
    }
    public void eliminarRestauracion(int codObra){
      Connection con;
@@ -86,7 +86,7 @@ public class DAORestauracion extends AbstractDAO {
         
    }
     public java.util.List<AntiguidadeSimplif> obtenerObras(String Restaurador) {
-        System.out.println("obtener obras dao");
+        //System.out.println("obtener obras dao");
         java.util.List<AntiguidadeSimplif> resultado = new java.util.ArrayList<AntiguidadeSimplif>();
         Connection con;
         //Obtener Nombre(titulo) de la obra, Estado, Fecha de Inicio, Fecha de Fin
@@ -113,7 +113,6 @@ public class DAORestauracion extends AbstractDAO {
              //TipoUsuario.valueOf(rsListaUsuarios.getString("tipo_usuario"))
              AntiguidadeSimplif antig = new AntiguidadeSimplif(TipoEstado.valueOf(rsListaObras.getString("estado")), rsListaObras.getInt("num_restauraciones"),
                      rsListaObras.getString("titulo"), rsListaObras.getDate("fecha_ini"), rsListaObras.getDate("fecha_fin"), rsListaObras.getInt("codigo"));
-             //        rsListaObras.getString("telefono"), rsListaObras.getBoolean("e_administrador"));
              resultado.add(antig);
          }
         } catch (SQLException e){
@@ -187,26 +186,55 @@ public class DAORestauracion extends AbstractDAO {
      
  }
 public void finalizaRestauracion(Integer CodObra, String Restaurador){
-    System.out.println("finalizar restauracion");
+    //System.out.println("finalizar restauracion");
         Connection con;
-        PreparedStatement stmUsuario=null;
-        Date date;
-       date = new Date(2000-04-07);
+        PreparedStatement stmActualiza=null;
         con=super.getConexion();
-
+        long millis=System.currentTimeMillis();  
+        java.sql.Date date=new java.sql.Date(millis); 
+        System.out.println("date:"+date);
+        
+        
         try {
-        stmUsuario=con.prepareStatement("update restauracions "+
-                                    "set fecha_fin=?"+
-                                    "where traballador=? and antiguidade=?");
-        stmUsuario.setDate(1, date);//poner fecha actual
-        stmUsuario.setString(2, Restaurador);
-        stmUsuario.setInt(3, CodObra);
+        //update restauracions set fecha_fin='2018-04-04' where antiguidade=11 and traballador='b';
+        //update restauracions set fecha_fin='2019-04-29 +02:00:00' where antiguidade='12' and traballador='b'
+        stmActualiza=con.prepareStatement("update restauracions "+
+                                            "set fecha_fin=? "+
+                                            "where antiguidade=? and traballador=?");
+        System.out.println("traballador:"+Restaurador+"   antiguidade:"+CodObra);
+        stmActualiza.setDate(1, date);//poner fecha actual
+        stmActualiza.setInt(2, CodObra);
+        stmActualiza.setString(3, Restaurador);
+            System.out.println(stmActualiza.toString());
         } catch (SQLException e){
           System.out.println(e.getMessage());
           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+          try {stmActualiza.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
+
+    public void setEstadoAntigu(TipoEstado Estado, Integer CodObra){
+    System.out.println("update de antiguidades de obra:"+CodObra+" a estado "+Estado);
+        Connection con;
+        PreparedStatement stmRestauracion=null;
+
+        con=super.getConexion();
+        try {
+        stmRestauracion=con.prepareStatement("update antiguidades set estado=? where obra=?");
+        stmRestauracion.setString(1, Estado.toString());
+        stmRestauracion.setInt(2, CodObra);
+        stmRestauracion.executeUpdate();
+  
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmRestauracion.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+
     
 }
+
+
