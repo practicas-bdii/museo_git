@@ -11,14 +11,14 @@ package aplicacion;
  */
 public class Pintura extends Obra {
 
-    private String tecnica;
+    private Tecnica tecnica;
 
-    public Pintura(String tecnica, Integer codigo, String titulo, Integer año, String sala, java.util.List<Autor> autores) {
+    public Pintura(Tecnica tecnica, Integer codigo, String titulo, Integer año, String sala, java.util.List<Autor> autores) {
         super(codigo, titulo, año, sala, autores);
         this.tecnica = tecnica;
     }
 
-    public String getTecnica() {
+    public Tecnica getTecnica() {
         return tecnica;
     }
 
