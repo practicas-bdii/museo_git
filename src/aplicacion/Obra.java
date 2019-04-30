@@ -63,16 +63,6 @@ public class Obra {
         return autores;
     }
 
-    public String getAutoresString() {
-        StringBuilder str = new StringBuilder();
-        ArrayList<Autor> ite = new ArrayList(this.autores);
-        for (Autor a : ite) {
-            str.append(a.getNombre());
-            str.append(", ");
-        }
-        return str.toString();
-    }
-
     public void setAutores(java.util.List<Autor> autores) {
         this.autores = autores;
     }
