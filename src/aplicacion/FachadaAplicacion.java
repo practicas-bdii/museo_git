@@ -4,9 +4,6 @@
  */
 package aplicacion;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 /**
  *
  * @author basesdatos
@@ -26,9 +23,9 @@ public class FachadaAplicacion {
         fbd = new baseDatos.FachadaBaseDatos(this);
         co = new GestionObras(fgui, fbd);
         cu = new GestionUsuarios(fgui, fbd);
-
-        cs = new GestionSuministradores(fgui, fbd);
-        ca = new GestionAutores(fgui, fbd);
+      
+        cs = new GestionSuministradores(fgui,fbd);
+        ca = new GestionAutores(fgui,fbd);
         gr = new GestionRestauraciones(fgui, fbd);
 
     }
@@ -72,6 +69,7 @@ public class FachadaAplicacion {
         cu.borrarUsuario(idUsuario);
     }
 
+
     public void adminCategorias() {
         //aqui debería abrir a ventana de administración de usuarios
         // fgui.verAdminCategorias();
@@ -82,17 +80,15 @@ public class FachadaAplicacion {
     }
 
     //Gestion SUMINISTRADORES
-    public void verAdquirir() {
+    public void verAdquirir(){
         cs.adminAdquirir();
     }
-
-    public java.util.List<Suministrador> obtenerSumins(String cif) {
-        return cs.obtenerSumins(cif);
-    }
-
-    ;
-
-    public void actualizarSuministrador(String cif, Suministrador s) {
+    
+    public java.util.List<Suministrador> obtenerSumins(String cif){
+      return cs.obtenerSumins(cif);
+    };
+   
+    public void actualizarSuministrador(String cif, Suministrador s){
         cs.actualizarSuministrador(cif, s);
     }
 
@@ -108,22 +104,15 @@ public class FachadaAplicacion {
         co.visualizarObras();
     }
 
-    public void visualizarEditarObra(int codigoObra) {
-        co.visualizarEditarObra(codigoObra);
-    }
-
     public java.util.List<Obra> obtenerObras(Integer codigo, String titulo, Integer ano, String autor, String sala, String tipo) {
         return co.obtenerObras(codigo, titulo, ano, autor, sala, tipo);
     }
-
-    public void verSumin() {
+    
+    public void verSumin(){
         cs.verSumin();
     }
 
     //Gestion AUTORES
-    public java.util.List<Autor> obtenerAutores() {
-        return ca.obtenerAutores();
-
      public void verAutores(){
         ca.verAutores();
     }
@@ -131,29 +120,18 @@ public class FachadaAplicacion {
     public java.util.List<Autor> obtenerAutores(String nome){
         return ca.obtenerAutores(nome);
     }
-
-    public java.util.List<Autor> obtenerAutores(int idObra) {
-        return ca.obtenerAutores(idObra);
-    }
-
-    public Autor obtenerAutor(String nome) {
-        return ca.obtenerAutor(nome);
-    }
-
     //Para Restauraciones
-    public java.util.List<AntiguidadeSimplif> obtenerObrasRestaurador(String Restaurador) {
+     public java.util.List<AntiguidadeSimplif> obtenerObrasRestaurador(String Restaurador) {
         return gr.obtenerObras(Restaurador);
     }
 
-    public java.util.List<AntiguidadeSimplif> obtenerDemasObras(String titulo) {
-        return gr.obtenerDemasObras(titulo);
+     public java.util.List<AntiguidadeSimplif> obtenerDemasObras(String titulo) {
+         return gr.obtenerDemasObras(titulo);
     }
-
-    public java.util.List<AntiguidadeSimplif> obtenerTodasObras() {
-        return gr.obtenerTodasObras();
+      public java.util.List<AntiguidadeSimplif> obtenerTodasObras() {
+         return gr.obtenerTodasObras();
     }
-
-    public void insertaRestauracion(Integer CodObra, String Restaurador) {
+    public void insertaRestauracion(Integer CodObra, String Restaurador){
         gr.insertaRestauracion(CodObra, Restaurador);
     }
 
@@ -165,19 +143,11 @@ public class FachadaAplicacion {
         ca.actualizarAutor(nome, a);
     }
 
-    public void insertarAutor(Autor a) {
+    public void insertarAutor(Autor a){
         ca.insertarAutor(a);
     }
-
-    public void borrarAutor(String nome) {
+    
+    public void borrarAutor(String nome){
         ca.borrarAutor(nome);
     }
-
-    public void finalizaRestauracion(Integer CodObra, String Restaurador) {
-        gr.finalizaRestauracion(CodObra, Restaurador);
-    }
-
-    /*public void actualizarObra(Obra obra, java.util.List<Autor> nuevosAutores, java.util.List<String> autoresAsignados, java.util.List autoresBorrados) {
-        co.actualizarObra(obra, nuevosAutores, autoresAsignados, autoresBorrados);
-    }*/
 }
