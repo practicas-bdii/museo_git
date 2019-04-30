@@ -13,38 +13,116 @@ import java.sql.*;
  * @author alumnogreibd
  */
 public class DAOAutores extends AbstractDAO {
-    
-    public DAOAutores (Connection conexion, aplicacion.FachadaAplicacion fa){
+
+    public DAOAutores(Connection conexion, aplicacion.FachadaAplicacion fa) {
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
-    
-    public java.util.List<Autor> consultarAutores(){
+
+    public java.util.List<Autor> consultarAutores() {
         java.util.List<Autor> resultado = new java.util.ArrayList<Autor>();
         Autor autorActual;
         Connection con;
-        PreparedStatement stmCategorias=null;
+        PreparedStatement stmCategorias = null;
         ResultSet rsAutores;
 
-        con=this.getConexion();
+        con = this.getConexion();
 
         try  {
-        stmCategorias=con.prepareStatement("select nome from autores");
+        stmCategorias=con.prepareStatement("select * from autores");
         rsAutores = stmCategorias.executeQuery();
         while (rsAutores.next())
         {
-           // autorActual = new Autor(rsAutores.getString("nome"), rsAutores.getString("fecha_nac"), rsAutores.getString("fecha_fal"));
-            //resultado.add(autorActual);
+
+            autorActual = new Autor(rsAutores.getString("nome"), rsAutores.getDate("fecha_nac"), rsAutores.getDate("fecha_fal"));
+            resultado.add(autorActual);
         }
 
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmCategorias.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCategorias.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
         }
         return resultado;
     }
     
+    public void actualizarAutor(String nome, Autor a){
+        Connection con;
+        PreparedStatement stmAutor = null;
+        
+        con = this.getConexion();
+        
+        try {
+            stmAutor = con.prepareStatement("update autores "+
+                                            "set nome = ?, "+
+                                            "    fecha_nac = ?, "+
+                                            "    fecha_fal=?, " +
+                                            "    where nome = ?");
+            stmAutor.setString(1, a.getNombre());
+           // stmAutor.setString(2, a.getFechaNacemento());
+          //  stmAutor.setString(3, a.getFechaFalecemento());
+            stmAutor.executeUpdate();
+            
+            
+            
+            } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmAutor.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+          
+        }
+    }
     
+    
+    
+    
+    public void insertarAutor(Autor a){
+        Connection con;
+        PreparedStatement stmAutor = null;
+    
+        con = this.getConexion();
+        
+        try{
+            
+            stmAutor=con.prepareStatement("insert into autores"+
+                                         "values (?,?,?)");
+            stmAutor.setString(1, a.getNombre());
+           // stmAutor.setString(2, a.getFechaNacemento());
+           // stmAutor.setString(3, a.getFechaFalecemento());
+            stmAutor.executeUpdate();
+            
+                    
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {stmAutor.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    public void borrarAutor(String nome){
+        Connection con;
+        PreparedStatement stmAutor = null;
+        
+        con = this.getConexion();
+        
+        try{
+            stmAutor = con.prepareStatement("delete from autores where nome = ?");
+                    stmAutor.setString(1, nome);
+                    stmAutor.executeUpdate();
+        }catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmAutor.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+          
+        }
+        
+    }
 }

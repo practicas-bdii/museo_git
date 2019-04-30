@@ -12,6 +12,7 @@ public class FachadaAplicacion {
 
     gui.FachadaGui fgui;
     baseDatos.FachadaBaseDatos fbd;
+    GestionObras co;
     GestionUsuarios cu;
     GestionSuministradores cs;
     GestionAutores ca;
@@ -20,10 +21,13 @@ public class FachadaAplicacion {
     public FachadaAplicacion() {
         fgui = new gui.FachadaGui(this);
         fbd = new baseDatos.FachadaBaseDatos(this);
+        co = new GestionObras(fgui, fbd);
         cu = new GestionUsuarios(fgui, fbd);
+      
         cs = new GestionSuministradores(fgui,fbd);
         ca = new GestionAutores(fgui,fbd);
         gr = new GestionRestauraciones(fgui, fbd);
+
     }
 
     public static void main(String args[]) {
@@ -41,14 +45,14 @@ public class FachadaAplicacion {
         fgui.muestraExcepcion(e);
     }
 
-//Chama a ao metodo da clase GestionUsuarios
+    //Chama a ao metodo da clase GestionUsuarios
     public java.util.List<Usuario> obtenerUsuarios(String id, String nombre) {
         return cu.obtenerUsuarios(id, nombre);
     }
 
     ;
-//gestion de usuarios
-public int comprobarAutentificacion(String idUsuario, String clave) {
+    //gestion de usuarios
+    public int comprobarAutentificacion(String idUsuario, String clave) {
         return cu.comprobarAutentificacion(idUsuario, clave);
     }
 
@@ -74,9 +78,11 @@ public int comprobarAutentificacion(String idUsuario, String clave) {
     public gui.FachadaGui getFachada() {
         return this.fgui;
     }
-    
-    
+
     //Gestion SUMINISTRADORES
+    public void verAdquirir(){
+        cs.adminAdquirir();
+    }
     
     public java.util.List<Suministrador> obtenerSumins(String cif){
       return cs.obtenerSumins(cif);
@@ -86,23 +92,36 @@ public int comprobarAutentificacion(String idUsuario, String clave) {
         cs.actualizarSuministrador(cif, s);
     }
 
-    public void insertarSuministrador(Suministrador s){
+    public void insertarSuministrador(Suministrador s) {
         cs.insertarSuministrador(s);
     }
-    
-    public void borrarSuministrador(String cif){
+
+    public void borrarSuministrador(String cif) {
         cs.borrarSuministrador(cif);
     }
-    
-    public void verAdminSumin(){
-        cs.verAdminSumin();
+
+    public void visualizarObras() {
+        co.visualizarObras();
     }
 
+    public java.util.List<Obra> obtenerObras(Integer codigo, String titulo, Integer ano, String autor, String sala, String tipo) {
+        return co.obtenerObras(codigo, titulo, ano, autor, sala, tipo);
+    }
+    
+    public void verSumin(){
+        cs.verSumin();
+    }
+
+    //Gestion AUTORES
+     public void verAutores(){
+        cs.adminAdquirir();
+    }
+    
     public java.util.List<Autor> obtenerAutores(){
         return ca.obtenerAutores();
     }
     //Para Restauraciones
-     public java.util.List<AntiguidadeSimplif> obtenerObras(String Restaurador) {
+     public java.util.List<AntiguidadeSimplif> obtenerObrasRestaurador(String Restaurador) {
         return gr.obtenerObras(Restaurador);
     }
 
@@ -115,8 +134,20 @@ public int comprobarAutentificacion(String idUsuario, String clave) {
     public void insertaRestauracion(Integer CodObra, String Restaurador){
         gr.insertaRestauracion(CodObra, Restaurador);
     }
-    
+
     public void finalizaRestauracion(Integer CodObra, String Restaurador, TipoEstado Estado){
         gr.finalizaRestauracion(CodObra, Restaurador, Estado);
+    }
+  
+    public void actualizarAutor(String nome, Autor a){
+        ca.actualizarAutor(nome, a);
+    }
+
+    public void insertarAutor(Autor a){
+        ca.insertarAutor(a);
+    }
+    
+    public void borrarAutor(String nome){
+        ca.borrarAutor(nome);
     }
 }

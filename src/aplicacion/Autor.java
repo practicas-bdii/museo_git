@@ -34,4 +34,9 @@ public class Autor {
         return fechaFalecemento;
     }
 
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+
 }
