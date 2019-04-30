@@ -29,4 +29,13 @@ public class GestionObras {
     public java.util.List<Obra> obtenerObras(Integer codigo, String titulo, Integer ano, String autor, String sala, String tipo) {
         return fbd.consultarCatalogo(codigo, titulo, ano, autor, sala, tipo);
     }
+
+    public void visualizarEditarObra(int codigoObra) {
+        Obra obra = fbd.consultarObra(codigoObra);
+        fgui.visualizarEditarObra(obra);
+    }
+
+    /*public void actualizarObra(Obra obra, java.util.List<Autor> nuevosAutores, java.util.List<String> autoresAsignados, java.util.List autoresBorrados) {
+        Connection con = fbd.g
+    }*/
 }
