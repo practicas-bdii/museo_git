@@ -30,12 +30,12 @@ public class DAOSuministradores extends AbstractDAO{
         con = this.getConexion();
         
         String consulta = "Select *" +
-                            "from subministradores" +
-                            "where cif like ?";
+                            "from subministradores";
+                            //"where cif = ?";
         
         try{
             stmSumin=con.prepareStatement(consulta);
-            stmSumin.setString(1, "%"+cif+"%");
+            //stmSumin.setString(1, cif);
             
             rsSumin=stmSumin.executeQuery();
         while(rsSumin.next())
@@ -96,7 +96,7 @@ public class DAOSuministradores extends AbstractDAO{
         
         try{
             
-            stmSumin=con.prepareStatement("insert into subministrador (cif, pais, nome, tipo)"+
+            stmSumin=con.prepareStatement("insert into subministradores (cif, pais, nome, tipo)"+
                                                     "values (?,?,?,?)");
             stmSumin.setString(1, s.getCIF());
             stmSumin.setString(2, s.getPais());
@@ -120,7 +120,7 @@ public class DAOSuministradores extends AbstractDAO{
         con = this.getConexion();
         
         try{
-            stmSumin = con.prepareStatement("delete from subministrador where cif = ?");
+            stmSumin = con.prepareStatement("delete from subministradores where cif = ?");
                     stmSumin.setString(1, cif);
                     stmSumin.executeUpdate();
         }catch (SQLException e){

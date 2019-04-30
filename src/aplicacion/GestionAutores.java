@@ -22,8 +22,8 @@ public class GestionAutores {
         this.fbd=fbd;
     }
     
-    public java.util.List<Autor> obtenerAutores(){
-        return fbd.consultarAutores();
+    public java.util.List<Autor> obtenerAutores(String nome){
+        return fbd.consultarAutores(nome);
     }
     
      public void verAutores(){

@@ -114,11 +114,11 @@ public class FachadaAplicacion {
 
     //Gestion AUTORES
      public void verAutores(){
-        cs.adminAdquirir();
+        ca.verAutores();
     }
     
-    public java.util.List<Autor> obtenerAutores(){
-        return ca.obtenerAutores();
+    public java.util.List<Autor> obtenerAutores(String nome){
+        return ca.obtenerAutores(nome);
     }
     //Para Restauraciones
      public java.util.List<AntiguidadeSimplif> obtenerObrasRestaurador(String Restaurador) {
