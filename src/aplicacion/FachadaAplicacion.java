@@ -134,8 +134,11 @@ public class FachadaAplicacion {
     public void insertaRestauracion(Integer CodObra, String Restaurador){
         gr.insertaRestauracion(CodObra, Restaurador);
     }
-    
 
+    public void finalizaRestauracion(Integer CodObra, String Restaurador, TipoEstado Estado){
+        gr.finalizaRestauracion(CodObra, Restaurador, Estado);
+    }
+  
     public void actualizarAutor(String nome, Autor a){
         ca.actualizarAutor(nome, a);
     }
@@ -146,9 +149,5 @@ public class FachadaAplicacion {
     
     public void borrarAutor(String nome){
         ca.borrarAutor(nome);
-    }
-  
-    public void finalizaRestauracion(Integer CodObra, String Restaurador){
-        gr.finalizaRestauracion(CodObra, Restaurador);
     }
 }

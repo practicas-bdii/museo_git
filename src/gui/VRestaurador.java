@@ -9,16 +9,12 @@
  */
 package gui;
 
+import aplicacion.TipoEstado;
 import aplicacion.Usuario;
 import javax.swing.ComboBoxModel;
 import aplicacion.TipoUsuario;
 
-/**
- *
- * @author alumno
- */
-public class VRestaurador extends javax.swing.JFrame {
-
+public class VRestaurador extends javax.swing.JDialog {
     /**
      * Creates new form VAviso
      */
@@ -36,11 +32,10 @@ public class VRestaurador extends javax.swing.JFrame {
     public VRestaurador(aplicacion.FachadaAplicacion fa, String Restaurador) {
         this.fa = fa;
         initComponents();
-        this.setTitle("Menú de Restauracióon");
-        this.IDRestaurador = Restaurador;
-        System.out.println("Loggeado como:" + IDRestaurador);
-        //this.setVisible(false);
-        //btnGuardar.setEnabled(false);
+        this.setTitle("Menú de Restauración");
+        this.IDRestaurador=Restaurador;
+        System.out.println("Loggeado como:"+IDRestaurador);
+        this.Usuario.setText(Restaurador);
     }
 
     /**
@@ -61,9 +56,8 @@ public class VRestaurador extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnBuscarDemasObras = new javax.swing.JButton();
         campoNombre = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        campoEstado1 = new javax.swing.JTextField();
-        campoObra1 = new javax.swing.JTextField();
+        campoEstado = new javax.swing.JTextField();
+        campoObra = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         RelizarRest = new javax.swing.JButton();
@@ -72,16 +66,18 @@ public class VRestaurador extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         campoCodigo = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        campoEstado = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         FinalizarObra = new javax.swing.JButton();
-        campoObra = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaTusObras = new javax.swing.JTable();
-        campoCodigo2 = new javax.swing.JTextField();
+        campoTuCodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        TEstado = new javax.swing.JComboBox(TipoEstado.values());
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        campoTuObra = new javax.swing.JTextField();
+        Usuario = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -123,17 +119,15 @@ public class VRestaurador extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Seleccionar");
-
-        campoEstado1.addActionListener(new java.awt.event.ActionListener() {
+        campoEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoEstado1ActionPerformed(evt);
+                campoEstadoActionPerformed(evt);
             }
         });
 
-        campoObra1.addActionListener(new java.awt.event.ActionListener() {
+        campoObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoObra1ActionPerformed(evt);
+                campoObraActionPerformed(evt);
             }
         });
 
@@ -154,9 +148,14 @@ public class VRestaurador extends javax.swing.JFrame {
                 TablaDemasObrasMouseWheelMoved(evt);
             }
         });
+        TablaDemasObras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaDemasObrasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TablaDemasObras);
 
-        jLabel7.setText("Código");
+        jLabel7.setText("Código:");
 
         campoCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,97 +168,73 @@ public class VRestaurador extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(135, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscarDemasObras))
+                        .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(44, 44, 44)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoEstado1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campoObra1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addComponent(RelizarRest)))
-                .addContainerGap(243, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoObra, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(96, 96, 96)
+                .addComponent(RelizarRest, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBuscarDemasObras)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(21, 21, 21)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(25, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarDemasObras))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(49, 49, 49))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(RelizarRest)
-                        .addGap(36, 36, 36))
+                        .addComponent(RelizarRest, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoObra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(4, 4, 4)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoEstado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
-                        .addContainerGap())))
+                        .addGap(20, 20, 20))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(61, 61, 61)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(110, Short.MAX_VALUE)))
+                    .addGap(42, 42, 42)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(96, Short.MAX_VALUE)))
         );
 
         jTabbedPane2.addTab("Demás Obras", jPanel2);
-
-        campoEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoEstadoActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Obra:");
-
-        jLabel2.setText("Estado:");
 
         FinalizarObra.setText("Finalizar Restauración");
         FinalizarObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FinalizarObraActionPerformed(evt);
-            }
-        });
-
-        campoObra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoObraActionPerformed(evt);
             }
         });
 
@@ -276,83 +251,102 @@ public class VRestaurador extends javax.swing.JFrame {
                 tablaTusObrasMouseWheelMoved(evt);
             }
         });
+        tablaTusObras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaTusObrasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaTusObras);
 
-        campoCodigo2.addActionListener(new java.awt.event.ActionListener() {
+        campoTuCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoCodigo2ActionPerformed(evt);
+                campoTuCodigoActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Codigo");
+        jLabel3.setText("Codigo:");
+
+        jLabel8.setText("Nuevo Estado:");
+
+        jLabel9.setText("Obra:");
+
+        campoTuObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoTuObraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap(71, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBuscar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoTuObra, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoObra, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoCodigo2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(56, 56, 56)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(campoTuCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(27, 27, 27)
                 .addComponent(FinalizarObra)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(100, 100, 100))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnBuscar)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(btnBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                        .addComponent(FinalizarObra)
-                        .addGap(36, 36, 36))
+                        .addGap(43, 43, 43)
+                        .addComponent(FinalizarObra, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(campoTuObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoCodigo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoTuCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))))
+                .addGap(37, 37, 37))
         );
 
         jTabbedPane2.addTab("Tus Obras", jPanel1);
+
+        Usuario.setText("Usuario");
+
+        jLabel1.setText("Usuario:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Usuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCerrar))
             .addComponent(jTabbedPane2)
         );
@@ -360,8 +354,11 @@ public class VRestaurador extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane2)
-                .addGap(18, 18, 18)
-                .addComponent(btnCerrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCerrar)
+                    .addComponent(Usuario)
+                    .addComponent(jLabel1)))
         );
 
         pack();
@@ -376,21 +373,11 @@ public class VRestaurador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tablaTusObrasMouseWheelMoved
 
-    private void campoObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoObraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoObraActionPerformed
-
     private void campoEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEstadoActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_campoEstadoActionPerformed
 
-    private void campoEstado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEstado1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoEstado1ActionPerformed
-
-    private void campoObra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoObra1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoObra1ActionPerformed
+    private void campoObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoObraActionPerformed
+    }//GEN-LAST:event_campoObraActionPerformed
 
     private void TablaDemasObrasMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_TablaDemasObrasMouseWheelMoved
         // TODO add your handling code here:
@@ -410,10 +397,9 @@ public class VRestaurador extends javax.swing.JFrame {
 
     private void btnBuscarDemasObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDemasObrasActionPerformed
         ModeloTablaDemasObras m;
-        //Usuario primero;
-        m = (ModeloTablaDemasObras) TablaDemasObras.getModel();
-        System.out.println("vrest");
-        if (campoNombre.getText().isEmpty()) {
+        m=(ModeloTablaDemasObras) TablaDemasObras.getModel();
+        //System.out.println("vrest");
+        if(campoNombre.getText().isEmpty()) {
             m.setFilas(fa.obtenerTodasObras());
         } else {
             m.setFilas(fa.obtenerDemasObras(campoNombre.getText()));
@@ -423,16 +409,13 @@ public class VRestaurador extends javax.swing.JFrame {
         if (m.getRowCount() > 0) {
             TablaDemasObras.setRowSelectionInterval(0, 0);
         }
-
     }//GEN-LAST:event_btnBuscarDemasObrasActionPerformed
 
     private void RelizarRestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelizarRestActionPerformed
         //if(!campoNombre.getText().isEmpty()||!campoEstado.getText().isEmpty())
         //añadir esa obra o texto
-        if (!campoCodigo.getText().isEmpty()) {
+        if(!campoCodigo.getText().isEmpty())
             fa.insertaRestauracion(Integer.valueOf(campoCodigo.getText()), this.IDRestaurador);
-        }
-
     }//GEN-LAST:event_RelizarRestActionPerformed
 
     private void campoCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCodigoActionPerformed
@@ -440,16 +423,35 @@ public class VRestaurador extends javax.swing.JFrame {
     }//GEN-LAST:event_campoCodigoActionPerformed
 
     private void FinalizarObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarObraActionPerformed
-        if (!campoCodigo2.getText().isEmpty()) {
-            fa.finalizaRestauracion(Integer.valueOf(campoCodigo2.getText()), this.IDRestaurador);
-        } else {
-            System.out.println("falta indicar la obra");
-        }
+        if(!campoTuCodigo.getText().isEmpty())
+            fa.finalizaRestauracion(Integer.valueOf(campoTuCodigo.getText()), this.IDRestaurador, (TipoEstado) TEstado.getSelectedItem());
+        else System.out.println("falta indicar la obra");
     }//GEN-LAST:event_FinalizarObraActionPerformed
 
-    private void campoCodigo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCodigo2ActionPerformed
+    private void campoTuCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTuCodigoActionPerformed
+
+    }//GEN-LAST:event_campoTuCodigoActionPerformed
+
+    private void tablaTusObrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaTusObrasMouseClicked
+        int row = tablaTusObras.rowAtPoint(evt.getPoint());
+        
+        System.out.println(tablaTusObras.getValueAt(row, 0));
+        System.out.println(tablaTusObras.getValueAt(row, 1));
+        System.out.println(tablaTusObras.getValueAt(row, 2));
+        campoTuObra.setText(tablaTusObras.getValueAt(row, 0).toString());
+        campoTuCodigo.setText(tablaTusObras.getValueAt(row, 4).toString());
+    }//GEN-LAST:event_tablaTusObrasMouseClicked
+
+    private void campoTuObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTuObraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoCodigo2ActionPerformed
+    }//GEN-LAST:event_campoTuObraActionPerformed
+
+    private void TablaDemasObrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDemasObrasMouseClicked
+        int row = TablaDemasObras.rowAtPoint(evt.getPoint());
+        campoObra.setText(TablaDemasObras.getValueAt(row, 0).toString());
+        campoEstado.setText(TablaDemasObras.getValueAt(row, 1).toString());
+        campoCodigo.setText(TablaDemasObras.getValueAt(row, 2).toString());
+    }//GEN-LAST:event_TablaDemasObrasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -457,27 +459,28 @@ public class VRestaurador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FinalizarObra;
     private javax.swing.JButton RelizarRest;
+    private javax.swing.JComboBox TEstado;
     private javax.swing.JTable TablaDemasObras;
+    private javax.swing.JLabel Usuario;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarDemasObras;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JTextField campoCodigo;
-    private javax.swing.JTextField campoCodigo2;
     private javax.swing.JTextField campoEstado;
-    private javax.swing.JTextField campoEstado1;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField campoObra;
-    private javax.swing.JTextField campoObra1;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JTextField campoTuCodigo;
+    private javax.swing.JTextField campoTuObra;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

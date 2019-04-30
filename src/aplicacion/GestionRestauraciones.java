@@ -33,8 +33,8 @@ public class GestionRestauraciones {
      public java.util.List<AntiguidadeSimplif> obtenerTodasObras() {
          return fbd.obtenerTodasObras();
     }
-     public void finalizaRestauracion(Integer CodObra, String Restaurador){
-        fbd.finalizaRestauracion(CodObra, Restaurador);
+     public void finalizaRestauracion(Integer CodObra, String Restaurador, TipoEstado Estado){
+        fbd.finalizaRestauracion(CodObra, Restaurador, Estado);
     }
     
 }
