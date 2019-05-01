@@ -26,6 +26,10 @@ public class GestionAutores {
         return fbd.consultarAutores(nome);
     }
     
+    public java.util.List<Autor> obtenerAutoresLista(){
+        return fbd.consultarAutoresLista();
+    }
+    
      public void verAutores(){
         fgui.verAutores();
     }

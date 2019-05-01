@@ -34,8 +34,8 @@ public class ModeloTablaSuministradores extends AbstractTableModel{
         
         switch(col){
             case 0: nombre= "cif"; break;
-            case 1: nombre= "pais"; break;
-            case 2: nombre= "nome"; break;
+            case 1: nombre= "nome"; break;
+            case 2: nombre= "pais"; break;
             case 3: nombre= "tipo"; break;
         }
         return nombre;

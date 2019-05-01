@@ -23,7 +23,7 @@ public class DAOAutores extends AbstractDAO {
 
     public java.util.List<Autor> consultarAutores(String nome) {
         java.util.List<Autor> resultado = new java.util.ArrayList<Autor>();
-        Autor autorActual;
+        Autor autorTmp;
         Connection con;
         PreparedStatement stmAutores = null;
         ResultSet rsAutores;
@@ -33,6 +33,38 @@ public class DAOAutores extends AbstractDAO {
         try  {
         stmAutores=con.prepareStatement("select * from autores where nome like ?");
         stmAutores.setString(1, "%"+nome+"%");
+        rsAutores = stmAutores.executeQuery();
+        while (rsAutores.next())
+        {
+
+            autorTmp = new Autor(rsAutores.getString("nome"), rsAutores.getDate("fecha_nac"), rsAutores.getDate("fecha_fal"));
+            resultado.add(autorTmp);
+        }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmAutores.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public java.util.List<Autor> consultarAutoresLista() {
+        java.util.List<Autor> resultado = new java.util.ArrayList<Autor>();
+        Autor autorActual;
+        Connection con;
+        PreparedStatement stmAutores = null;
+        ResultSet rsAutores;
+
+        con = this.getConexion();
+
+        try  {
+        stmAutores=con.prepareStatement("select * from autores");
         rsAutores = stmAutores.executeQuery();
         while (rsAutores.next())
         {
@@ -64,7 +96,7 @@ public class DAOAutores extends AbstractDAO {
             stmAutor = con.prepareStatement("update autores "+
                                             "set nome = ?, "+
                                             "    fecha_nac = ?, "+
-                                            "    fecha_fal=?, " +
+                                            "    fecha_fal= ?, " +
                                             "    where nome = ?");
             stmAutor.setString(1, a.getNombre());
             stmAutor.setString(2, sdf.format(a.getFechaNacemento()));

@@ -100,6 +100,11 @@ public class FachadaAplicacion {
         cs.borrarSuministrador(cif);
     }
 
+    public void verSumin(){
+        cs.verSumin();
+    }
+    
+    //Gestion OBRAS
     public void visualizarObras() {
         co.visualizarObras();
     }
@@ -108,10 +113,18 @@ public class FachadaAplicacion {
         return co.obtenerObras(codigo, titulo, ano, autor, sala, tipo);
     }
     
-    public void verSumin(){
-        cs.verSumin();
+    public void insertarObras(Obra o){
+        co.insertarObras(o);
     }
-
+    
+    public void insertarAutorcObra(Autor a, Obra o){
+        co.insertarAutorcObra(a, o);
+    }
+    
+    public void insertarAdquisicion(Integer obra, Suministrador sumin, TipoAdquisicion tipo, String fecha, Float precio){
+        co.insertarAdquisicion(obra, sumin, tipo, fecha, precio);
+    }
+    
     //Gestion AUTORES
      public void verAutores(){
         ca.verAutores();
@@ -120,6 +133,23 @@ public class FachadaAplicacion {
     public java.util.List<Autor> obtenerAutores(String nome){
         return ca.obtenerAutores(nome);
     }
+    
+    public java.util.List<Autor> obtenerAutoresLista(){
+        return ca.obtenerAutoresLista();
+    }
+        
+    public void actualizarAutor(String nome, Autor a){
+        ca.actualizarAutor(nome, a);
+    }
+
+    public void insertarAutor(Autor a){
+        ca.insertarAutor(a);
+    }
+    
+    public void borrarAutor(String nome){
+        ca.borrarAutor(nome);
+    }
+    
     //Para Restauraciones
      public java.util.List<AntiguidadeSimplif> obtenerObrasRestaurador(String Restaurador) {
         return gr.obtenerObras(Restaurador);
@@ -139,15 +169,4 @@ public class FachadaAplicacion {
         gr.finalizaRestauracion(CodObra, Restaurador, Estado);
     }
   
-    public void actualizarAutor(String nome, Autor a){
-        ca.actualizarAutor(nome, a);
-    }
-
-    public void insertarAutor(Autor a){
-        ca.insertarAutor(a);
-    }
-    
-    public void borrarAutor(String nome){
-        ca.borrarAutor(nome);
-    }
 }

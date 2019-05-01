@@ -8,6 +8,15 @@ package gui;
 import aplicacion.TipoSuministrador;
 import aplicacion.Suministrador;
 import aplicacion.Autor;
+import aplicacion.TipoMaterial;
+import aplicacion.TipoObra;
+import aplicacion.TipoPintura;
+import aplicacion.TipoEstado;
+import aplicacion.Obra;
+import aplicacion.TipoAdquisicion;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.*;
+
 
 /**
  *
@@ -22,9 +31,9 @@ public class VAdquirir extends javax.swing.JDialog {
         //super(parent, modal);
         this.fa=fa;
         initComponents();
-        
-       // buscarAutores();
        
+        comboTipoObra.setModel(new javax.swing.DefaultComboBoxModel(TipoObra.values()));
+              
     }
 
     /**
@@ -58,6 +67,15 @@ public class VAdquirir extends javax.swing.JDialog {
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listaAutores = new javax.swing.JList();
+        btnBuscarAutor = new javax.swing.JButton();
+        txtAutor = new javax.swing.JTextField();
+        combodepende = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaAutoresSelect = new javax.swing.JList();
+        btnQuitar = new javax.swing.JButton();
+        trans = new javax.swing.JLabel();
+        tipoTransac = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,13 +96,23 @@ public class VAdquirir extends javax.swing.JDialog {
 
         etqtAutor.setText("Autor:");
 
-        etqtTipo.setText("Tipo:");
+        etqtTipo.setText("Tipo Obra:");
 
         comboTipoObra.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        comboTipoObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTipoObraActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Precio:");
 
         btnAdquirir.setText("Adquirir");
+        btnAdquirir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdquirirActionPerformed(evt);
+            }
+        });
 
         btnSair.setText("Cerrar");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +124,11 @@ public class VAdquirir extends javax.swing.JDialog {
         jLabel2.setText("Adquirir Obras");
 
         tablaSumins.setModel(new ModeloTablaSuministradores());
+        tablaSumins.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaSuminsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaSumins);
 
         btnBuscar.setText("Buscar");
@@ -113,100 +146,158 @@ public class VAdquirir extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(listaAutores);
 
+        btnBuscarAutor.setText("Buscar");
+        btnBuscarAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarAutorActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Tipo:");
+
+        listaAutoresSelect.setModel(new ModeloListaAutores());
+        listaAutoresSelect.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaAutoresSelectMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(listaAutoresSelect);
+
+        btnQuitar.setText("Quitar");
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
+
+        trans.setText("Transaccion:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(274, 274, 274)
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEngadir))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(etqtSubmin)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textSubmin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3)))
-                        .addGap(44, 44, 44)
+                        .addComponent(etqtAutor)
+                        .addGap(19, 19, 19)
+                        .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscarAutor))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(etqtSubmin)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(textSubmin, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(3, 3, 3)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnAdquirir)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(2, 2, 2)
-                                            .addComponent(etqtTipo)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(numPrecio)
-                                        .addComponent(comboTipoObra, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnEngadir)
+                            .addComponent(btnQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(etqtTitulo)
                                     .addComponent(etqtAno)
                                     .addComponent(etqtSala)
-                                    .addComponent(etqtAutor))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtTitulo)
-                                    .addComponent(txtAno)
-                                    .addComponent(txtSala, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(jLabel2)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                                    .addComponent(etqtTitulo))
+                                .addGap(55, 55, 55)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(etqtTipo)
+                                    .addComponent(jLabel3)
+                                    .addComponent(trans)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tipoTransac, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(combodepende, javax.swing.GroupLayout.Alignment.LEADING, 0, 180, Short.MAX_VALUE)
+                                    .addComponent(comboTipoObra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtSala, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(numPrecio)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(152, 152, 152)
+                                .addComponent(btnAdquirir)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etqtTitulo)
-                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(etqtSubmin)
-                    .addComponent(textSubmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(etqtAno)
-                            .addComponent(txtAno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2)
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(etqtSubmin)
+                            .addComponent(textSubmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscar))
                         .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(etqtTitulo)
+                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(etqtAno)
+                            .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(etqtSala)
                             .addComponent(txtSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(etqtAutor)
-                                .addGap(0, 107, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comboTipoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(etqtTipo))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(etqtTipo)
-                            .addComponent(comboTipoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                            .addComponent(combodepende, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(numPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(trans)
+                            .addComponent(tipoTransac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etqtAutor)
+                    .addComponent(btnBuscarAutor)
+                    .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(numPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(btnEngadir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnQuitar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdquirir)
-                    .addComponent(btnSair)
-                    .addComponent(btnEngadir))
+                    .addComponent(btnSair))
                 .addGap(23, 23, 23))
         );
 
@@ -225,25 +316,150 @@ public class VAdquirir extends javax.swing.JDialog {
 
     private void btnEngadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEngadirActionPerformed
         // TODO add your handling code here:
-        fa.verSumin();
+        ModeloListaAutores mla;
+        ModeloListaAutores mlaS; //ListaAutores Seleccionados
+
+        //Asignamos modelo ás listas
+        mla = (ModeloListaAutores) listaAutores.getModel();
+        mlaS = (ModeloListaAutores) listaAutoresSelect.getModel();
+
+        mlaS.nuevoAutor(mla.obtenerAutor(listaAutores.getSelectedIndex()));
+        mla.borrarElemento(listaAutores.getSelectedIndex());
+        if (mla.getSize()==0) btnEngadir.setEnabled(false);
+        else listaAutoresSelect.setSelectedIndex(0);
     }//GEN-LAST:event_btnEngadirActionPerformed
 
     private void listaAutoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaAutoresMouseClicked
         // TODO add your handling code here:
-      //  Autor aut;
-        //ModeloListaAutores mla;
+        Autor aut;
+        ModeloListaAutores mla;
 
         //Asignamos modelo á lista
-        //mla = (ModeloListaAutores) listaAutores.getModel();
+        mla = (ModeloListaAutores) listaAutores.getModel();
 
         //Asignamos os valores dos Jfield á nova lista
-        //aut = mla.obtenerAutor(listaAutores.getSelectedIndex());
+        aut = mla.obtenerAutor(listaAutores.getSelectedIndex());
 
         //Asignamos campos de texto a categoria correspondente
-        //textoNombre.setText(c.getNombre());
-        //textoDescrip.setText(c.getDescripcion());
-        //textoCatLib.setText(buscarNumLibros(c.getNombre()));
+        txtAutor.setText(aut.getNombre());
     }//GEN-LAST:event_listaAutoresMouseClicked
+
+    private void btnBuscarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAutorActionPerformed
+        // TODO add your handling code here:
+        buscarAutores();
+    }//GEN-LAST:event_btnBuscarAutorActionPerformed
+
+    private void btnAdquirirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdquirirActionPerformed
+        // TODO add your handling code here:
+        Obra nuevaO;
+        ModeloTablaSuministradores mts;
+        ModeloListaAutores mlaS;
+        java.util.List<Autor> aut = new java.util.ArrayList<Autor>();
+        Integer nAutores;
+        Autor[] arrayAut;
+        String tit, strAno, strSala, strPrecio;
+        Integer ano, sala;
+        Float precio;
+        Suministrador smn;
+        TipoAdquisicion tadq;
+        String fecha = "por agroa nada";
+        
+        //Ini tablaSumins e listaAutores
+        mts= (ModeloTablaSuministradores) tablaSumins.getModel();
+        mlaS= (ModeloListaAutores) listaAutoresSelect.getModel();
+               
+        //Valores das variables de Obra
+        tit = txtTitulo.getText();      
+        strAno = txtAno.getText();
+        ano = Integer.parseInt(strAno);
+        strSala = txtSala.getText();
+        sala = Integer.parseInt(strSala);
+        aut = mlaS.getAutores();
+        strPrecio = numPrecio.getText();
+        precio = Float.parseFloat(strPrecio);
+        smn = mts.obtenerSuministrador(tablaSumins.getSelectedRow());
+        
+        //Asignase variables á obra 
+        nuevaO = new Obra(54, tit, ano, sala, aut);
+        
+        //Insertamos en Obras
+        //fa.insertarObras(nuevaO);
+        
+        //Asignase variables autor_crea_obra e chamase as funcions de modificacion da bd
+        nAutores = aut.size();              //Numero de autores da obra
+        arrayAut = new Autor[nAutores];     //Array de autores
+        arrayAut = aut.toArray(arrayAut);
+        
+        //Insertamos en Autor_crea_obra
+        for(int i=0; i <= nAutores; i++)
+        {
+            fa.insertarAutorcObra(arrayAut[i], nuevaO);
+        }
+        
+        //If para TipoAdquisicion
+        if(smn.getTipo().equals(TipoSuministrador.altruista)) tadq = TipoAdquisicion.Donacion;
+        else tadq= TipoAdquisicion.Compra;
+        tipoTransac.setText(tadq.toString());
+        
+        
+        //Insertamos en Adquisicions
+        fa.insertarAdquisicion(sala, smn, tadq, fecha, precio);
+        
+    }//GEN-LAST:event_btnAdquirirActionPerformed
+
+    private void comboTipoObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoObraActionPerformed
+        // TODO add your handling code here:
+        //String opcion=(String)comboTipoObra.getSelectedItem();
+        
+        if(comboTipoObra.getSelectedItem().equals(TipoObra.Pintura)){
+            combodepende.setModel(new javax.swing.DefaultComboBoxModel(TipoPintura.values()));
+        } 
+        else{
+            if(comboTipoObra.getSelectedItem().equals(TipoObra.Escultura)){
+                combodepende.setModel(new javax.swing.DefaultComboBoxModel(TipoMaterial.values()));
+            }   
+            else{
+                combodepende.setModel(new javax.swing.DefaultComboBoxModel(TipoEstado.values()));
+            }
+        }
+    }//GEN-LAST:event_comboTipoObraActionPerformed
+
+    private void listaAutoresSelectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaAutoresSelectMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaAutoresSelectMouseClicked
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        // TODO add your handling code here:
+        ModeloListaAutores mla;
+        ModeloListaAutores mlaS; //ListaAutores Seleccionados
+
+        //Asignamos modelo ás listas
+        mla = (ModeloListaAutores) listaAutores.getModel();
+        mlaS = (ModeloListaAutores) listaAutoresSelect.getModel();
+
+        mla.nuevoAutor(mla.obtenerAutor(listaAutoresSelect.getSelectedIndex()));
+        mlaS.borrarElemento(listaAutoresSelect.getSelectedIndex());
+        if (mlaS.getSize()==0) btnQuitar.setEnabled(false);
+        else listaAutores.setSelectedIndex(0);
+    }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void tablaSuminsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSuminsMouseClicked
+        // TODO add your handling code here:
+        ModeloTablaSuministradores mts;
+        Suministrador smn;
+        TipoAdquisicion tadq;
+        
+        mts = (ModeloTablaSuministradores) tablaSumins.getModel();
+        smn = mts.obtenerSuministrador(tablaSumins.getSelectedRow()); 
+         
+        //If para TipoAdquisicion
+        if(smn.getTipo().equals(TipoSuministrador.altruista))
+        {   tadq = TipoAdquisicion.Donacion;
+            numPrecio.setEnabled(true);
+        }
+        else tadq= TipoAdquisicion.Compra;
+        tipoTransac.setText(tadq.toString());
+    }//GEN-LAST:event_tablaSuminsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -252,9 +468,12 @@ public class VAdquirir extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdquirir;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscarAutor;
     private javax.swing.JButton btnEngadir;
+    private javax.swing.JButton btnQuitar;
     private javax.swing.JButton btnSair;
     private javax.swing.JComboBox comboTipoObra;
+    private javax.swing.JComboBox combodepende;
     private javax.swing.JLabel etqtAno;
     private javax.swing.JLabel etqtAutor;
     private javax.swing.JLabel etqtSala;
@@ -263,13 +482,19 @@ public class VAdquirir extends javax.swing.JDialog {
     private javax.swing.JLabel etqtTitulo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList listaAutores;
+    private javax.swing.JList listaAutoresSelect;
     private javax.swing.JTextField numPrecio;
     private javax.swing.JTable tablaSumins;
     private javax.swing.JTextField textSubmin;
+    private javax.swing.JTextField tipoTransac;
+    private javax.swing.JLabel trans;
     private javax.swing.JTextField txtAno;
+    private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtSala;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
@@ -290,8 +515,8 @@ public class VAdquirir extends javax.swing.JDialog {
         mla=(ModeloListaAutores) listaAutores.getModel();
         java.util.List<Autor> l;
         
-       // l = fa.obtenerAutores();
-        //mla.setAutores(l);
+        l = fa.obtenerAutores(txtAutor.getText());
+        mla.setAutores(l);
     }
 
 }

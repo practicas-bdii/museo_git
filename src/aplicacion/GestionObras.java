@@ -29,4 +29,16 @@ public class GestionObras {
     public java.util.List<Obra> obtenerObras(Integer codigo, String titulo, Integer ano, String autor, String sala, String tipo) {
         return fbd.consultarCatalogo(codigo, titulo, ano, autor, sala, tipo);
     }
+    
+    public void insertarObras(Obra o){
+        fbd.insertarObra(o);
+    }
+    
+    public void insertarAutorcObra(Autor a, Obra o){
+        fbd.insertarAutorcObra(a, o);
+    }    
+    
+    public void insertarAdquisicion(Integer obra, Suministrador sumin, TipoAdquisicion tipo, String fecha, Float precio){
+        fbd.insertarAdquisicion(obra, sumin, tipo, fecha, precio);
+    }    
 }

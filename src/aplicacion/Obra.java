@@ -16,10 +16,10 @@ public class Obra {
     private Integer codigo;
     private String titulo;
     private Integer ano;
-    private String sala;
+    private Integer sala;
     private java.util.List<Autor> autores;
 
-    public Obra(Integer codigo, String titulo, Integer ano, String sala, java.util.List<Autor> autores) {
+    public Obra(Integer codigo, String titulo, Integer ano, Integer sala, java.util.List<Autor> autores) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.ano = ano;
@@ -51,11 +51,11 @@ public class Obra {
         this.ano = ano;
     }
 
-    public String getSala() {
+    public Integer getSala() {
         return sala;
     }
 
-    public void setSala(String sala) {
+    public void setSala(Integer sala) {
         this.sala = sala;
     }
 

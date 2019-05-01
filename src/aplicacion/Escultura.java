@@ -13,7 +13,7 @@ public class Escultura extends Obra {
 
     private String material;
 
-    public Escultura(String material, Integer codigo, String titulo, Integer año, String sala, java.util.List<Autor> autores) {
+    public Escultura(String material, Integer codigo, String titulo, Integer año, Integer sala, java.util.List<Autor> autores) {
         super(codigo, titulo, año, sala, autores);
         this.material = material;
     }

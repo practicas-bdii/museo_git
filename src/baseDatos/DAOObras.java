@@ -13,6 +13,8 @@ import aplicacion.Pintura;
 import aplicacion.TipoEstado;
 import java.sql.*;
 import java.util.ArrayList;
+import aplicacion.Suministrador;
+import aplicacion.TipoAdquisicion;
 
 /**
  *
@@ -94,7 +96,7 @@ public class DAOObras extends AbstractDAO {
                     while (rsPinturas.next()) {
                         pinturaTmp = new Pintura(rsPinturas.getString("tecnica"), rsPinturas.getInt("obra"),
                                 rsObras.getString("titulo"), rsObras.getInt("ano"),
-                                rsObras.getString("sala"), autoresTmp);
+                                rsObras.getInt("sala"), autoresTmp);
 
                         resultado.add(pinturaTmp);
                     }
@@ -115,7 +117,7 @@ public class DAOObras extends AbstractDAO {
                     while (rsEsculturas.next()) {
                         esculturaTmp = new Escultura(rsEsculturas.getString("material"), rsEsculturas.getInt("obra"),
                                 rsObras.getString("titulo"), rsObras.getInt("ano"),
-                                rsObras.getString("sala"), autoresTmp);
+                                rsObras.getInt("sala"), autoresTmp);
 
                         resultado.add(esculturaTmp);
                     }
@@ -140,7 +142,7 @@ public class DAOObras extends AbstractDAO {
                     while (rsAntiguidades.next()) {
                         antiguidadeTmp = new Antiguidade(TipoEstado.valueOf(rsAntiguidades.getString("estado")), rsAntiguidades.getInt("num_restauraciones"),
                                 rsObras.getInt("codigo"), rsObras.getString("titulo"), rsObras.getInt("ano"),
-                                rsObras.getString("sala"), autoresTmp);
+                                rsObras.getInt("sala"), autoresTmp);
 
                         resultado.add(antiguidadeTmp);
                     }
@@ -206,7 +208,7 @@ public class DAOObras extends AbstractDAO {
                     rsPinturas = stmPinturas.executeQuery();
                     pinturaTmp = new Pintura(rsPinturas.getString("tecnica"), rsPinturas.getInt("obra"),
                             rsObras.getString("titulo"), rsObras.getInt("ano"),
-                            rsObras.getString("sala"), autoresTmp);
+                            rsObras.getInt("sala"), autoresTmp);
 
                     resultado.add(pinturaTmp);
                 } else if (rsObras.getString("tipo").equals("escultura")) {
@@ -225,7 +227,7 @@ public class DAOObras extends AbstractDAO {
                     rsEsculturas = stmEsculturas.executeQuery();
                     esculturaTmp = new Escultura(rsEsculturas.getString("material"), rsEsculturas.getInt("obra"),
                             rsObras.getString("titulo"), rsObras.getInt("ano"),
-                            rsObras.getString("sala"), autoresTmp);
+                            rsObras.getInt("sala"), autoresTmp);
 
                     resultado.add(esculturaTmp);
                 } else {
@@ -244,7 +246,7 @@ public class DAOObras extends AbstractDAO {
                     rsAntiguidades = stmAntiguidades.executeQuery();
                     antiguidadeTmp = new Antiguidade(TipoEstado.valueOf(rsAntiguidades.getString("estado")), rsAntiguidades.getInt("num_restauraciones"),
                             rsAntiguidades.getInt("codigo"), rsObras.getString("titulo"), rsAntiguidades.getInt("ano"),
-                            rsObras.getString("sala"), autoresTmp);
+                            rsObras.getInt("sala"), autoresTmp);
 
                     resultado.add(antiguidadeTmp);
                 }
@@ -262,6 +264,80 @@ public class DAOObras extends AbstractDAO {
             }
         }
         return resultado;
+    }
+    
+    public void insertarObra(Obra o){
+        Connection con;
+        PreparedStatement stmObra = null;
+    
+        con = this.getConexion();
+        
+        try{
+            
+            stmObra=con.prepareStatement("insert into obras"+
+                                         "values (?,?,?,?)");
+            stmObra.setInt(1, o.getCodigo());
+            stmObra.setString(2, o.getTitulo());
+            stmObra.setInt(3, o.getAno());
+            stmObra.setInt(4, o.getSala());
+            stmObra.executeUpdate();
+            
+                    
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {stmObra.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    public void insertarAutcObra(Autor a, Obra o){
+        Connection con;
+        PreparedStatement stmAutcObra = null;
+    
+        con = this.getConexion();
+        
+        try{
+            
+            stmAutcObra=con.prepareStatement("insert into autor_crea_obra"+
+                                            "values (?,?)");
+            stmAutcObra.setString(1, a.getNombre());
+            stmAutcObra.setInt(2, o.getCodigo());
+            stmAutcObra.executeUpdate();
+            
+                    
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {stmAutcObra.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    public void insertarAdquisicion(Integer obra, Suministrador sumin, TipoAdquisicion tipo, String fecha, Float precio){
+        Connection con;
+        PreparedStatement stmAutcObra = null;
+    
+        con = this.getConexion();
+        
+        try{
+            
+            stmAutcObra=con.prepareStatement("insert into adquisicions"+
+                                            "values (?,?,?,?,?)");
+            stmAutcObra.setInt(1, obra);
+            stmAutcObra.setString(2, sumin.getCIF());
+            stmAutcObra.setString(3, tipo.toString());
+            //stmAutcObra.setString(2, fecha);
+            stmAutcObra.setFloat(5, precio);
+            stmAutcObra.executeUpdate();
+            
+                    
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+            try {stmAutcObra.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
     }
 
     public java.util.List<Autor> consultarAutores(String nome) {

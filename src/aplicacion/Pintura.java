@@ -13,7 +13,7 @@ public class Pintura extends Obra {
 
     private String tecnica;
 
-    public Pintura(String tecnica, Integer codigo, String titulo, Integer año, String sala, java.util.List<Autor> autores) {
+    public Pintura(String tecnica, Integer codigo, String titulo, Integer año, Integer sala, java.util.List<Autor> autores) {
         super(codigo, titulo, año, sala, autores);
         this.tecnica = tecnica;
     }

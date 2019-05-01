@@ -15,6 +15,7 @@ public class ModeloListaAutores extends javax.swing.AbstractListModel {
 
     public ModeloListaAutores(){
         this.autor = new java.util.ArrayList<Autor>();
+     
     }
 
     @Override
@@ -27,7 +28,7 @@ public class ModeloListaAutores extends javax.swing.AbstractListModel {
         return autor.get(i).getNombre();
     }
 
-    public void nuevaAutor(Autor c){
+    public void nuevoAutor(Autor c){
         this.autor.add(c);
         fireIntervalAdded(this, this.autor.size()-1, this.autor.size()-1);
     }
@@ -47,8 +48,8 @@ public class ModeloListaAutores extends javax.swing.AbstractListModel {
        this.autor = autor;
        fireContentsChanged(this, 0, autor.size()-1);
     }
-
-    //public java.util.List<String> getElementos(){
-    //    return this.elementos;
-    //}
+    
+    public java.util.List<Autor> getAutores(){
+        return this.autor;
+    }
 }

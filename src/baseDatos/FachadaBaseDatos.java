@@ -11,6 +11,7 @@ import aplicacion.Obra;
 import aplicacion.Usuario;
 import aplicacion.TipoUsuario;
 import aplicacion.Suministrador;
+import aplicacion.TipoAdquisicion;
 import aplicacion.TipoEstado;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -130,7 +131,10 @@ public class FachadaBaseDatos {
     //Gestion AUTORES
     public java.util.List<Autor> consultarAutores(String nome) {
         return daoAutores.consultarAutores(nome);
-
+    }
+    
+    public java.util.List<Autor> consultarAutoresLista() {
+        return daoAutores.consultarAutoresLista();
     }
 
     public java.util.List<Obra> consultarCatalogo(Integer codigo, String titulo, Integer ano, String autor, String sala, String tipo) {
@@ -150,6 +154,8 @@ public class FachadaBaseDatos {
         //Gestion de Restauracion
     }
 
+    //Gestion OBRAS
+    
     public java.util.List<AntiguidadeSimplif> obtenerObras(String Restaurador) {
         System.out.println("fbd");
         return daorestauracion.obtenerObras(Restaurador);
@@ -160,7 +166,7 @@ public class FachadaBaseDatos {
         return daorestauracion.obtenerDemasObras(titulo);
     }
 
-   public void insertaRestauracion(Integer CodObra, String Restaurador){
+    public void insertaRestauracion(Integer CodObra, String Restaurador){
        if(daorestauracion.existeRestauracion(CodObra)==false)
         daorestauracion.realizarRestauracion(CodObra, Restaurador);
         daorestauracion.setEstadoAntigu(TipoEstado.restaurandose, CodObra);
@@ -170,8 +176,20 @@ public class FachadaBaseDatos {
         return daorestauracion.obtenerTodasObras();
     }
   
-   public void finalizaRestauracion(Integer CodObra, String Restaurador, TipoEstado Estado){
+    public void finalizaRestauracion(Integer CodObra, String Restaurador, TipoEstado Estado){
         daorestauracion.finalizaRestauracion(CodObra, Restaurador);
         daorestauracion.setEstadoAntigu(Estado, CodObra);
+    }
+   
+    public void insertarObra(Obra o){
+        daoObras.insertarObra(o);
+    }
+    
+    public void insertarAutorcObra(Autor a, Obra o){
+        daoObras.insertarAutcObra(a, o);
+    }
+    
+    public void insertarAdquisicion(Integer obra, Suministrador sumin, TipoAdquisicion tipo, String fecha, Float precio){
+        daoObras.insertarAdquisicion(obra, sumin, tipo, fecha, precio);
     }
 }
