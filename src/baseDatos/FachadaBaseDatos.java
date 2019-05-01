@@ -147,9 +147,10 @@ public class FachadaBaseDatos {
         return daorestauracion.obtenerDemasObras(titulo);
     }
    public void insertaRestauracion(Integer CodObra, String Restaurador){
-       if(daorestauracion.existeRestauracion(CodObra)==false)
+       if(daorestauracion.existeRestauracion(CodObra, Restaurador)==false){
         daorestauracion.realizarRestauracion(CodObra, Restaurador);
         daorestauracion.setEstadoAntigu(TipoEstado.restaurandose, CodObra);
+       }
     }
    public java.util.List<AntiguidadeSimplif> obtenerTodasObras() {
          return daorestauracion.obtenerTodasObras();

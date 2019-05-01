@@ -20,15 +20,16 @@ public class DAORestauracion extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
 
-   public boolean existeRestauracion(Integer codObra){
+   public boolean existeRestauracion(Integer codObra, String Restaurador){
        Connection con;
        PreparedStatement stmUsuario=null;
        con=super.getConexion();
        ResultSet rsListaUsuarios;
         try {
         stmUsuario=con.prepareStatement("select * from restauracions "+
-                                      " where antiguidade=? ");
+                                      " where antiguidade=? and traballador=?");
         stmUsuario.setInt(1, codObra);
+        stmUsuario.setString(2, Restaurador);
         rsListaUsuarios=stmUsuario.executeQuery();
         if (rsListaUsuarios.next()){
             return true;
