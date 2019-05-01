@@ -2,38 +2,35 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//Obxetivo: Dar de alta novos usuario, Dar de baixa usuarios existentes e Editar información dos existentes 
+//Obxetivo: Dar de alta novos usuario, Dar de baixa usuarios existentes e Editar información dos existentes
 /*Por ahora: busca tus obras, inserta obras(realizar restauracion) si son antiguidades <-hacer que se seleccione,
         buscar todas obras y filtrar por nombre si quieres, lo dejé en finalizar restauracion que falla en algo
     Me hace falta obtener la fecha actual para completar e realizar y finalizar restaurador
-*/
-
+ */
 package gui;
+
 import aplicacion.TipoEstado;
 import aplicacion.Usuario;
 import javax.swing.ComboBoxModel;
 import aplicacion.TipoUsuario;
 
-
 public class VRestaurador extends javax.swing.JDialog {
-
     /**
      * Creates new form VAviso
      */
     private aplicacion.FachadaAplicacion fa;
     private String IDRestaurador;
-    
-    
+
     public VRestaurador(aplicacion.FachadaAplicacion fa) {
-        this.fa=fa;
+        this.fa = fa;
         initComponents();
         this.setTitle("Menú de Restauracióon");
         //this.setVisible(false);
         //btnGuardar.setEnabled(false);
     }
-    
+
     public VRestaurador(aplicacion.FachadaAplicacion fa, String Restaurador) {
-        this.fa=fa;
+        this.fa = fa;
         initComponents();
         this.setTitle("Menú de Restauración");
         this.IDRestaurador=Restaurador;
@@ -400,34 +397,36 @@ public class VRestaurador extends javax.swing.JDialog {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         ModeloTablaTusObras m;
         //Usuario primero;
-        m=(ModeloTablaTusObras) tablaTusObras.getModel();
-        m.setFilas(fa.obtenerObras(this.IDRestaurador));
+        m = (ModeloTablaTusObras) tablaTusObras.getModel();
+        m.setFilas(fa.obtenerObrasRestaurador(this.IDRestaurador));
         //fa.obtenerObras(this.IDRestaurador);
         //(buscaId.getText().isEmpty())?null:Integer.parseInt(buscaId.getText())
-        if (m.getRowCount() > 0)
+        if (m.getRowCount() > 0) {
             tablaTusObras.setRowSelectionInterval(0, 0);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBuscarDemasObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDemasObrasActionPerformed
         ModeloTablaDemasObras m;
         m=(ModeloTablaDemasObras) TablaDemasObras.getModel();
         //System.out.println("vrest");
-        if(campoNombre.getText().isEmpty())
+        if(campoNombre.getText().isEmpty()) {
             m.setFilas(fa.obtenerTodasObras());
-        else
-        m.setFilas(fa.obtenerDemasObras(campoNombre.getText()));
-        
+        } else {
+            m.setFilas(fa.obtenerDemasObras(campoNombre.getText()));
+        }
+
         //(buscaId.getText().isEmpty())?null:Integer.parseInt(buscaId.getText())
-        if (m.getRowCount() > 0)
+        if (m.getRowCount() > 0) {
             TablaDemasObras.setRowSelectionInterval(0, 0);
+        }
     }//GEN-LAST:event_btnBuscarDemasObrasActionPerformed
 
     private void RelizarRestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelizarRestActionPerformed
         //if(!campoNombre.getText().isEmpty()||!campoEstado.getText().isEmpty())
-            //añadir esa obra o texto
+        //añadir esa obra o texto
         if(!campoCodigo.getText().isEmpty())
-            fa.insertaRestauracion(Integer.valueOf(campoCodigo.getText()), this.IDRestaurador);  
-        
+            fa.insertaRestauracion(Integer.valueOf(campoCodigo.getText()), this.IDRestaurador);
     }//GEN-LAST:event_RelizarRestActionPerformed
 
     private void campoCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCodigoActionPerformed
@@ -474,7 +473,6 @@ public class VRestaurador extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FinalizarObra;
     private javax.swing.JButton RelizarRest;
@@ -510,7 +508,6 @@ public class VRestaurador extends javax.swing.JDialog {
     private javax.swing.JTable tablaTusObras;
     // End of variables declaration//GEN-END:variables
 
-
-    
-
+    public void buscarUsuarios() {
+    }
 }

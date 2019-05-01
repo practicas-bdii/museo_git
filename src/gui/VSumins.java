@@ -18,8 +18,8 @@ public class VSumins extends javax.swing.JDialog{
     aplicacion.FachadaAplicacion fa;
          
     /*** Creates new form VUsuario*/
-    public VSumins(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
-        super(parent, modal);
+    public VSumins(aplicacion.FachadaAplicacion fa) {
+        //super(parent, modal);
         this.fa=fa;
         initComponents();
         

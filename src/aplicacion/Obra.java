@@ -67,4 +67,8 @@ public class Obra {
         this.autores = autores;
     }
 
+    public boolean tieneAutor() {
+        return this.autores != null;
+    }
+
 }

@@ -39,8 +39,12 @@ public class GestionSuministradores {
         fbd.borrarSuministrador(cif);
     }
     
-    public void verAdminSumin(){
-        //fgui.verAdminSumin();
+    public void verSumin(){
+        fgui.verSumin();
+    }
+    
+    public void adminAdquirir(){
+        fgui.verAdquirir();
     }
     
 }
