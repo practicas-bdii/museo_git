@@ -79,6 +79,7 @@ public class VRestaurador extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         campoTuObra = new javax.swing.JTextField();
+        actEstado = new javax.swing.JButton();
         Usuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -279,12 +280,19 @@ public class VRestaurador extends javax.swing.JDialog {
             }
         });
 
+        actEstado.setText("Solo Actualizar Estado");
+        actEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actEstadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
@@ -298,8 +306,10 @@ public class VRestaurador extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(TEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(campoTuCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(27, 27, 27)
+                            .addComponent(campoTuCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(actEstado)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(FinalizarObra)
                 .addGap(100, 100, 100))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -316,11 +326,8 @@ public class VRestaurador extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(FinalizarObra, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoTuObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -330,8 +337,12 @@ public class VRestaurador extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))))
-                .addGap(37, 37, 37))
+                            .addComponent(jLabel8)
+                            .addComponent(actEstado)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(FinalizarObra, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36))
         );
 
         jTabbedPane2.addTab("Tus Obras", jPanel1);
@@ -454,6 +465,11 @@ public class VRestaurador extends javax.swing.JDialog {
         campoCodigo.setText(TablaDemasObras.getValueAt(row, 2).toString());
     }//GEN-LAST:event_TablaDemasObrasMouseClicked
 
+    private void actEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actEstadoActionPerformed
+        if(!campoTuCodigo.getText().isEmpty())
+            fa.actualizaEstado(Integer.valueOf(campoTuCodigo.getText()), (TipoEstado) TEstado.getSelectedItem());
+    }//GEN-LAST:event_actEstadoActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -465,6 +481,7 @@ public class VRestaurador extends javax.swing.JDialog {
     private javax.swing.JComboBox TEstado;
     private javax.swing.JTable TablaDemasObras;
     private javax.swing.JLabel Usuario;
+    private javax.swing.JButton actEstado;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarDemasObras;
     private javax.swing.JButton btnCerrar;

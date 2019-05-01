@@ -36,5 +36,8 @@ public class GestionRestauraciones {
      public void finalizaRestauracion(Integer CodObra, String Restaurador, TipoEstado Estado){
         fbd.finalizaRestauracion(CodObra, Restaurador, Estado);
     }
+     public void actualizaEstado(Integer CodObra, TipoEstado Estado){
+        fbd.actualizaEstado(CodObra, Estado);
+    }
     
 }

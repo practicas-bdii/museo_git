@@ -158,5 +158,7 @@ public class FachadaBaseDatos {
         daorestauracion.finalizaRestauracion(CodObra, Restaurador);
         daorestauracion.setEstadoAntigu(Estado, CodObra);
     }
-   
+   public void actualizaEstado(Integer CodObra, TipoEstado Estado){
+        daorestauracion.setEstadoAntigu(Estado, CodObra);
+    }
 }

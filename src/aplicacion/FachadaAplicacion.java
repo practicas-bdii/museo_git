@@ -119,4 +119,8 @@ public int comprobarAutentificacion(String idUsuario, String clave) {
     public void finalizaRestauracion(Integer CodObra, String Restaurador, TipoEstado Estado){
         gr.finalizaRestauracion(CodObra, Restaurador, Estado);
     }
+    
+    public void actualizaEstado(Integer CodObra, TipoEstado Estado){
+        gr.actualizaEstado(CodObra, Estado);
+    }
 }

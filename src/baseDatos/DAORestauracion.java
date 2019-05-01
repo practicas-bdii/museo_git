@@ -202,10 +202,13 @@ public void finalizaRestauracion(Integer CodObra, String Restaurador){
                                             "set fecha_fin=? "+
                                             "where antiguidade=? and traballador=?");
         System.out.println("traballador:"+Restaurador+"   antiguidade:"+CodObra);
+        //stmActualiza.setString(1, date.toString());//poner fecha actual
         stmActualiza.setDate(1, date);//poner fecha actual
         stmActualiza.setInt(2, CodObra);
         stmActualiza.setString(3, Restaurador);
             System.out.println(stmActualiza.toString());
+        stmActualiza.executeUpdate();
+
         } catch (SQLException e){
           System.out.println(e.getMessage());
           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
