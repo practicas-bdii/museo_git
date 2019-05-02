@@ -215,9 +215,10 @@ public class VAutor extends javax.swing.JDialog {
         //Bucle modificación/inserción
         if (tablaAutores.getSelectedRow() > 0){ //modificación de usuarios
             //System.out.println("probando");
-                String idU = mta.obtenerAutor(tablaAutores.getSelectedRow()).getNombre(); //Seleccion Usuario
+                String nomeAut = mta.obtenerAutor(tablaAutores.getSelectedRow()).getNombre(); //Seleccion Usuario
+                System.out.println(Date.valueOf(dataNac.getText()));
                 mta.actualizarAutor(tablaAutores.getSelectedRow(), newAutor);
-                fa.actualizarAutor(idU, newAutor);           
+                fa.actualizarAutor(nomeAut, newAutor);           
         }else {                                  //inserción de usuarios
                 mta.novoAutor(newAutor);
                 fa.insertarAutor(newAutor);

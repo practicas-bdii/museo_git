@@ -96,11 +96,11 @@ public class DAOAutores extends AbstractDAO {
             stmAutor = con.prepareStatement("update autores "+
                                             "set nome = ?, "+
                                             "    fecha_nac = ?, "+
-                                            "    fecha_fal= ?, " +
+                                            "    fecha_fal= ? " +
                                             "    where nome = ?");
             stmAutor.setString(1, a.getNombre());
-            stmAutor.setString(2, sdf.format(a.getFechaNacemento()));
-            stmAutor.setString(3, sdf.format(a.getFechaFalecemento()));
+            stmAutor.setString(2, "'" + a.getFechaNacementoString() + "'");
+            stmAutor.setString(3, "'" + a.getFechaFalecementoString() + "'");
             stmAutor.setString(4, nome);
             stmAutor.executeUpdate();
             
@@ -118,18 +118,20 @@ public class DAOAutores extends AbstractDAO {
     public void insertarAutor(Autor a){
         Connection con;
         PreparedStatement stmAutor = null;
-        long millis=System.currentTimeMillis();  
-        java.sql.Date date=new java.sql.Date(millis);
+        //long millis=System.currentTimeMillis();  
+       // java.sql.Date date=new java.sql.Date(millis);
     
         con = this.getConexion();
         
-        try{
-            
+        try{           
             stmAutor=con.prepareStatement("insert into autores"+
-                                         "values (?,?,?)");
+                                         " values (?,?,?)");
             stmAutor.setString(1, a.getNombre());
-          //  stmAutor.setString(2, (Date) a.getFechaNacemento());
-           // stmAutor.setString(3, 0);
+             //stmAutor.setString(2,"'" + a.getFechaNacemento() + "'");
+            //stmAutor.setString(3,"'" + a.getFechaFalecemento() + "'");
+            stmAutor.setString(2, a.getFechaNacementoString());
+            stmAutor.setString(3,a.getFechaFalecementoString());
+            System.out.println("Consulta: "+ stmAutor.toString());
             stmAutor.executeUpdate();
             
                     

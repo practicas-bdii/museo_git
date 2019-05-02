@@ -6,7 +6,7 @@
 package gui;
 import aplicacion.Autor;
 import javax.swing.table.*;
-
+import java.text.ParseException;
 
 /**
  *
@@ -59,10 +59,35 @@ public class ModeloTablaAutores extends AbstractTableModel {
 
         switch (col){
             case 0: resultado= autor.get(row).getNombre(); break;
-            case 1: resultado= autor.get(row).getFechaNacemento(); break;
-            case 2: resultado= autor.get(row).getFechaFalecemento(); break;
+            case 1: resultado= autor.get(row).getFechaNacementoString(); break;
+            case 2: resultado= autor.get(row).getFechaFalecementoString(); break;
         }
         return resultado;
+    }
+    
+    @Override
+    public void setValueAt(Object v, int row, int col){
+        switch (col){
+            case 0:
+                autor.get(row).setNombre((String) v); break;
+            case 1: {
+                try {
+                    autor.get(row).setFechaNacemento((String) v);
+                } catch (ParseException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println("Formato de data invalido.");
+                }
+            } break;
+            case 2:   {
+                try {
+                    autor.get(row).setFechaFalecemento((String) v);
+                } catch (ParseException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println("Formato de data invalido.");
+                }
+            } break;  
+                
+        }
     }
     
     public void setFilas(java.util.List<Autor> autor){

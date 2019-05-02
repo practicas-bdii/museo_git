@@ -33,6 +33,7 @@ public class VAdquirir extends javax.swing.JDialog {
         initComponents();
        
         comboTipoObra.setModel(new javax.swing.DefaultComboBoxModel(TipoObra.values()));
+        combodepende.setModel(new javax.swing.DefaultComboBoxModel(TipoPintura.values()));
               
     }
 
@@ -76,6 +77,7 @@ public class VAdquirir extends javax.swing.JDialog {
         btnQuitar = new javax.swing.JButton();
         trans = new javax.swing.JLabel();
         tipoTransac = new javax.swing.JTextField();
+        euro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -172,6 +174,8 @@ public class VAdquirir extends javax.swing.JDialog {
 
         trans.setText("Transaccion:");
 
+        euro.setText("$");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -207,10 +211,6 @@ public class VAdquirir extends javax.swing.JDialog {
                             .addComponent(btnQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -229,16 +229,24 @@ public class VAdquirir extends javax.swing.JDialog {
                                     .addComponent(trans)
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tipoTransac, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(combodepende, javax.swing.GroupLayout.Alignment.LEADING, 0, 180, Short.MAX_VALUE)
-                                    .addComponent(comboTipoObra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtSala, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(numPrecio)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(tipoTransac, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(combodepende, javax.swing.GroupLayout.Alignment.LEADING, 0, 180, Short.MAX_VALUE)
+                                        .addComponent(comboTipoObra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtSala, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(numPrecio)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(euro))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(152, 152, 152)
                                 .addComponent(btnAdquirir)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,7 +292,8 @@ public class VAdquirir extends javax.swing.JDialog {
                     .addComponent(btnBuscarAutor)
                     .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(numPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(euro))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -339,6 +348,7 @@ public class VAdquirir extends javax.swing.JDialog {
 
         //Asignamos os valores dos Jfield á nova lista
         aut = mla.obtenerAutor(listaAutores.getSelectedIndex());
+        if (aut == null) btnEngadir.setEnabled(true);
 
         //Asignamos campos de texto a categoria correspondente
         txtAutor.setText(aut.getNombre());
@@ -362,7 +372,7 @@ public class VAdquirir extends javax.swing.JDialog {
         Float precio;
         Suministrador smn;
         TipoAdquisicion tadq;
-        String fecha = "por agroa nada";
+        String fecha = "1900-01-01";
         
         //Ini tablaSumins e listaAutores
         mts= (ModeloTablaSuministradores) tablaSumins.getModel();
@@ -380,20 +390,22 @@ public class VAdquirir extends javax.swing.JDialog {
         smn = mts.obtenerSuministrador(tablaSumins.getSelectedRow());
         
         //Asignase variables á obra 
-        nuevaO = new Obra(54, tit, ano, sala, aut);
+        nuevaO = new Obra(20, tit, ano, sala, aut);
         
         //Insertamos en Obras
-        //fa.insertarObras(nuevaO);
+        fa.insertarObras(nuevaO);
+        
+        
         
         //Asignase variables autor_crea_obra e chamase as funcions de modificacion da bd
         nAutores = aut.size();              //Numero de autores da obra
         arrayAut = new Autor[nAutores];     //Array de autores
-        arrayAut = aut.toArray(arrayAut);
+        aut.toArray(arrayAut);
         
         //Insertamos en Autor_crea_obra
-        for(int i=0; i <= nAutores; i++)
+        for(int i=0; i < nAutores; i++)
         {
-            fa.insertarAutorcObra(arrayAut[i], nuevaO);
+           fa.insertarAutorcObra(arrayAut[i], nuevaO);
         }
         
         //If para TipoAdquisicion
@@ -401,9 +413,11 @@ public class VAdquirir extends javax.swing.JDialog {
         else tadq= TipoAdquisicion.Compra;
         tipoTransac.setText(tadq.toString());
         
-        
         //Insertamos en Adquisicions
-        fa.insertarAdquisicion(sala, smn, tadq, fecha, precio);
+        fa.insertarAdquisicion(sala, smn, tadq, null, null);
+        
+        //A que será FINAL
+        //fa.insertarObras(nuevaO, nAutores, aut, sala, smn, tadq, );
         
     }//GEN-LAST:event_btnAdquirirActionPerformed
 
@@ -455,7 +469,7 @@ public class VAdquirir extends javax.swing.JDialog {
         //If para TipoAdquisicion
         if(smn.getTipo().equals(TipoSuministrador.altruista))
         {   tadq = TipoAdquisicion.Donacion;
-            numPrecio.setEnabled(true);
+            numPrecio.setText("0.0");  
         }
         else tadq= TipoAdquisicion.Compra;
         tipoTransac.setText(tadq.toString());
@@ -480,6 +494,7 @@ public class VAdquirir extends javax.swing.JDialog {
     private javax.swing.JLabel etqtSubmin;
     private javax.swing.JLabel etqtTipo;
     private javax.swing.JLabel etqtTitulo;
+    private javax.swing.JLabel euro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -517,6 +532,7 @@ public class VAdquirir extends javax.swing.JDialog {
         
         l = fa.obtenerAutores(txtAutor.getText());
         mla.setAutores(l);
+        
     }
 
 }

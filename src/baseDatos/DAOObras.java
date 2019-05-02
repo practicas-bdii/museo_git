@@ -275,8 +275,8 @@ public class DAOObras extends AbstractDAO {
         try{
             
             stmObra=con.prepareStatement("insert into obras"+
-                                         "values (?,?,?,?)");
-            stmObra.setInt(1, o.getCodigo());
+                                         " values (?,?,?,?)");
+            stmObra.setInt(1, o.getCodigo());                    
             stmObra.setString(2, o.getTitulo());
             stmObra.setInt(3, o.getAno());
             stmObra.setInt(4, o.getSala());
@@ -297,10 +297,11 @@ public class DAOObras extends AbstractDAO {
     
         con = this.getConexion();
         
+        
         try{
             
             stmAutcObra=con.prepareStatement("insert into autor_crea_obra"+
-                                            "values (?,?)");
+                                            " values (?,?)");
             stmAutcObra.setString(1, a.getNombre());
             stmAutcObra.setInt(2, o.getCodigo());
             stmAutcObra.executeUpdate();
@@ -323,7 +324,7 @@ public class DAOObras extends AbstractDAO {
         try{
             
             stmAutcObra=con.prepareStatement("insert into adquisicions"+
-                                            "values (?,?,?,?,?)");
+                                            " values (?,?,?,?,?)");
             stmAutcObra.setInt(1, obra);
             stmAutcObra.setString(2, sumin.getCIF());
             stmAutcObra.setString(3, tipo.toString());
